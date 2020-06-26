@@ -1,3 +1,11 @@
+# React Reusable Components - Web
+
+In this directory you can find web-only React components/hooks/utils.
+
+- [Project root](../)
+
+-----------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
