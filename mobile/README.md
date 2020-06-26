@@ -2,7 +2,7 @@
 
 In this directory you can find mobile-only React components/hooks/utils.
 
-- [Project root](../)
+- [Back to project root](https://github.com/teamairship/react-reusable-components)
 
 --------
 
