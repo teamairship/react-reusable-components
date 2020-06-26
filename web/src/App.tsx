@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.scss';
-import SiteHeader from './_AppInternal/components/SiteHeader';
+import SiteHeader from './_AppInternal/_components/SiteHeader';
 
 function App() {
   return (

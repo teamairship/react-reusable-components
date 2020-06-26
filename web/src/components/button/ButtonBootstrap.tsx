@@ -12,7 +12,7 @@ interface Props {
   type?: ButtonType,
 }
 
-const Button: React.FC<Props> = ({
+const ButtonBootstrap: React.FC<Props> = ({
   className,
   children,
   onClick,
@@ -31,4 +31,4 @@ const Button: React.FC<Props> = ({
   );
 };
 
-export default Button;
+export default ButtonBootstrap;

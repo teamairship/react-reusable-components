@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Button, { ButtonType } from '../ui/Button';
+import ButtonBootstrap, { ButtonType } from '../button/ButtonBootstrap';
 
 interface Props {
   className?: string | object,
@@ -16,7 +16,7 @@ const NavMenuToggle: React.FC<Props> = ({
   type,
 }) => {
   return (
-    <Button
+    <ButtonBootstrap
       type={type} className={className}
       onClick={onClick}
     >
@@ -24,7 +24,7 @@ const NavMenuToggle: React.FC<Props> = ({
         <>{title}&nbsp;&nbsp;</>
       ) : null}
       <i className="fas fa-bars" />
-    </Button>
+    </ButtonBootstrap>
   );
 };
 
