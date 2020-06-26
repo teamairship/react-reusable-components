@@ -1,4 +1,4 @@
-![Airship LLC](./airship-logo.png)
+[![Airship LLC](./airship-logo.png)](https://teamairship.com/)
 
 ```
 ██████  ███████  █████   ██████ ████████                                                  
