@@ -5,8 +5,9 @@ import reactLogo from '../_assets/react-logo.svg';
 import './SiteHeader.scss';
 import Container from './Container';
 
-import NavMenuToggle from '../../components/navigation/NavMenuToggle';
-import ModalBootstrap from '../../components/modal/ModalBootstrap';
+import Button from '../../components/bootstrap/Button';
+import Modal from '../../components/bootstrap/Modal';
+import focusElement from '../../utils/dom/focusElement';
 
 const SiteHeaderLeft = () => {
   return (
@@ -28,13 +29,15 @@ interface SiteHeaderRightProps {
 }
 const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({ showNavModal }) => {
   return (
-    <div>
-      <NavMenuToggle
+    <div className="text-center my-4 my-md-0">
+      <Button
         type="light"
         onClick={() => {
           showNavModal();
         }}
-      />
+      >
+        <i className="fas fa-bars" />
+      </Button>
     </div>
   );
 };
@@ -43,6 +46,7 @@ const SiteHeader = () => {
   const [isShowingNavModal, setIsShowingNavModal] = React.useState<boolean>(false);
   const showNavModal = () => { setIsShowingNavModal(true); }
   const hideNavModal = () => { setIsShowingNavModal(false); }
+  const r1 = React.useRef(null);
   return (
     <>
       <header className="App-header">
@@ -51,9 +55,18 @@ const SiteHeader = () => {
           <SiteHeaderRight showNavModal={showNavModal} />
         </Container>
       </header>
-      <ModalBootstrap isShowing={isShowingNavModal} closeModal={hideNavModal} >
+      <Modal
+        isShowing={isShowingNavModal}
+        closeModal={hideNavModal}
+        onAfterShow={() => {
+          focusElement(r1.current);
+        }}
+      >
         Hello world
-      </ModalBootstrap>
+        <p>
+          <input ref={r1} />
+        </p>
+      </Modal>
     </>
   );
 };
