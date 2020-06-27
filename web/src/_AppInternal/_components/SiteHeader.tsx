@@ -1,7 +1,7 @@
 
 import React from 'react';
 import reactLogo from '../_assets/react-logo.svg';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import './SiteHeader.scss';
 import Container from './Container';
@@ -16,11 +16,9 @@ const SiteHeaderLeft = () => {
     <div className="d-flex flex-row align-items-center justify-content-center justify-content-md-between">
       <img src={reactLogo} className="App-logo" alt="airship logo" />
       <h1 className="App-name">
-        <a
-          href="/"
-        >
+        <Link to="/">
           REACT REUSABLE <br className="d-md-none"/>COMPONENTS
-        </a>
+        </Link>
       </h1>
     </div>
   );
