@@ -1,0 +1,105 @@
+
+@import '../../css/mixins';
+@import '../../css/vars';
+
+$NAV_WIDTH_SM: 300px;
+$NAV_WIDTH_MD: 400px;
+$NAV_WIDTH_LG: 500px;
+$DRAWER_SPEED: 250ms;
+$EASING: cubic-bezier(.75,.01,.25,1);
+
+$CLASSNAME_BODY_NAV_SHOWING: 'nav-drawer-showing';
+$CLASSNAME_BODY_NAV_ANIMATE_SLIDE: 'animate-drawer-slide';
+$CLASSNAME_NAV_SHOWING: 'show';
+$CLASSNAME_NAV_ANIMATE_SLIDE_OVER: 'animate-slide-over';
+
+.nav-drawer {
+  display: inline-block;
+  position: fixed;
+  left: 100%;
+  top: 0;
+  bottom: 0;
+  background-color: black;
+  color: white;
+  min-width: $NAV_WIDTH_SM;
+  padding: 15px 30px;
+
+  @include respond($BREAKPOINT_TABLET) {
+    min-width: $NAV_WIDTH_MD;
+  }
+  @include respond($BREAKPOINT_LAPTOP) {
+    min-width: $NAV_WIDTH_LG;
+  }
+
+  button.close {
+    float: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 7px 10px;
+    color: inherit;
+    font-weight: 300;
+
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+}
+
+.nav-drawer.#{$CLASSNAME_NAV_ANIMATE_SLIDE_OVER} {
+  @include transition(left $DRAWER_SPEED $EASING);
+
+  &.#{$CLASSNAME_NAV_SHOWING} {
+    left: calc(100% - #{$NAV_WIDTH_SM});
+
+    @include respond($BREAKPOINT_TABLET) {
+      left: calc(100% - #{$NAV_WIDTH_MD});
+    }
+    @include respond($BREAKPOINT_LAPTOP) {
+      left: calc(100% - #{$NAV_WIDTH_LG});
+    }
+  }
+}
+
+body.#{$CLASSNAME_BODY_NAV_SHOWING} {
+  overflow: hidden;
+  transform: translateX(-$NAV_WIDTH_SM);
+
+  @include respond($BREAKPOINT_TABLET) {
+    transform: translateX(-$NAV_WIDTH_MD);
+  }
+
+  @include respond($BREAKPOINT_LAPTOP) {
+    transform: translateX(-$NAV_WIDTH_LG);
+  }
+}
+
+body.#{$CLASSNAME_BODY_NAV_ANIMATE_SLIDE} {
+  @include transition(transform $DRAWER_SPEED $EASING);
+}
+
+.nav-drawer-title {
+  font-size: 1.2em;
+  padding-top: 11px;
+  margin-bottom: 0;
+  font-weight: 300;
+  letter-spacing: 0.4em;
+}
+
+.nav-drawer-divider {
+  margin-top: 31px;
+  margin-bottom: 30px;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(255,255,255,0.5);
+  // background-color: transparentize(cyan, 0.5);
+}
+
+.nav-drawer-content {
+  padding-bottom: 30px;
+  overflow: auto;
+  max-height: 85vh;
+  margin-right: -30px;
+}

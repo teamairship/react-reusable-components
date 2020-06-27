@@ -5,6 +5,7 @@ import cx from '../../utils/css/composeClassNames';
 import getDOMBody from '../../utils/dom/getDOMBody';
 import hasScrollbars from '../../utils/dom/hasScrollbars';
 
+const CLASSNAME_BODY_MODAL_OPEN = 'modal-open';
 const ANIMATION_TIME_PRE_SHOW = 50;
 const ANIMATION_TIME_FADE = 150;
 
@@ -54,7 +55,7 @@ const ModalBootstrap: React.FC<Props> = ({
   React.useEffect(() => {
     clearAllTimeouts();
     if (isShowing && !wasShowing.current) {
-      restrictBodyScroll && getDOMBody().classList.add('modal-open');
+      restrictBodyScroll && getDOMBody().classList.add(CLASSNAME_BODY_MODAL_OPEN);
       setHasScrollbarOffset(hasScrollbars());
       setIsRendering(true);
       // modal must first have `display: block` applied
@@ -67,7 +68,7 @@ const ModalBootstrap: React.FC<Props> = ({
         onAfterShow && onAfterShow();
       }, ANIMATION_TIME_PRE_SHOW + ANIMATION_TIME_FADE);
     } else if (!isShowing && wasShowing.current) {
-      restrictBodyScroll && getDOMBody().classList.remove('modal-open');
+      restrictBodyScroll && getDOMBody().classList.remove(CLASSNAME_BODY_MODAL_OPEN);
       setIsVisible(false);
       addTimeout(() => {
         setIsRendering(false);

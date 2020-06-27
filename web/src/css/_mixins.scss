@@ -1,0 +1,168 @@
+
+/* Mixin to prefix several properties at once
+ * @author Hugo Giraudel
+ * Shouldn't need after autoprefixer
+ * @param {Map} $declarations - Declarations to prefix
+ * @param {List} $prefixes (()) - List of prefixes to print
+ * usage: @include prefix((border-radius: 5px), webkit moz);
+ */
+@mixin prefix($declarations, $prefixes: ()) {
+  @each $property, $value in $declarations {
+    @each $prefix in $prefixes {
+      #{'-' + $prefix + '-' + $property}: $value;
+    }
+    /* Output standard non-prefixed declaration */
+    #{$property}: $value;
+  }
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin animate($name, $duration, $timing-function: 'ease-in-out', $iteration-count: 1) {
+  @include prefix((animation-name: $name), webkit);
+  @include prefix((animation-duration: $duration), webkit);
+  @include prefix((animation-timing-function: $timing-function), webkit);
+  @include prefix((animation-iteration-count: $iteration-count), webkit);
+}
+
+
+@mixin clearfix() {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin d-flex() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-center() {
+  @include d-flex();
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin antialiased() { -webkit-font-smoothing: antialiased; }
+
+@mixin no-antialiased() { -webkit-font-smoothing: auto; }
+
+@mixin transition($args...) {
+  @include prefix((transition: $args), webkit moz ms o);
+}
+
+@mixin transform($args...) {
+  @include prefix((transform: $args), webkit);
+}
+
+@mixin ease-in-out($time) {
+  @include transition(all $time ease-in-out);
+}
+
+@mixin ease-in-out-bezier($time) {
+  @include transition(all $time cubic-bezier(.75,.01,.25,1));
+}
+
+/**
+ * calculates size relative to document root with px fallback
+ */
+@function calculaterem($size) {
+  $remSize: $size / 16px;
+
+  @return $remSize * 1rem;
+}
+
+/**
+ * font-size mixin with fallback
+ */
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculaterem($size);
+}
+
+/**
+ * line-height mixin with fallback
+ */
+@mixin line-height($size) {
+  line-height: $size;
+  line-height: calculaterem($size);
+}
+
+/// Mixin to customize scrollbars
+/// Beware, this does not work in all browsers
+/// @author Hugo Giraudel
+/// @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+/// @param {Color} $foreground-color - Scrollbar's color
+/// @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+/// @example scss - Scrollbar styling
+///   @include scrollbars(.5em, slategray);
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+      position: absolute;
+      width:  $size;
+      height: $size;
+  }
+  &::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+  }
+  &::-webkit-scrollbar-track {
+      background: $background-color;
+  }
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+/**
+ * Mixin to output hover, active, and focus selectors all in one line and less code
+ * @param {String} $sel - defaults to "&" to select parent
+ * usage
+ * - before => a:hover, a:active, a:focus { color: red; }
+ * - after => @include(a) { color: red; }
+ */
+@mixin hover($sel: "&") {
+  #{$sel}:hover, #{$sel}:active, #{$sel}:focus { @content; }
+}
+
+/**
+ * Dynamic Media Queries
+ * Allow in-line media queries
+ * usage:
+ *  .selector { width: 100%;
+ *    @include respond(768px) { width: 30%; }
+ *    @include respond(768px, 'down') { width: 100%; }
+ *  }
+ */
+@mixin respond($breakpoint, $operator: 'up', $dimension: 'width') {
+  @if $operator == 'up' {
+    @media print, screen and (min-#{ $dimension }: $breakpoint) {
+      @content;
+    }
+  }
+
+  @else if $operator == 'down' {
+    @if unit( $breakpoint ) == 'px' {
+      $breakpoint: $breakpoint - 1;
+    }
+
+    @media screen and (max-#{ $dimension }: $breakpoint) {
+      @content;
+    }
+  }
+}
