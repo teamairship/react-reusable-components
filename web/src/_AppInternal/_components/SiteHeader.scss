@@ -52,3 +52,28 @@
     }
   }
 }
+
+.nav-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-menu-link {
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:before {
+    content: ':: ';
+  }
+
+  &.active {
+    color: white;
+    font-weight: bold;
+  }
+}

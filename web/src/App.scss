@@ -7,3 +7,12 @@
   width: 100%;
 }
 
+a {
+  color: #61dafb;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken(#61dafb, 20%);
+  }
+}

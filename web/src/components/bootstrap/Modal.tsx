@@ -24,7 +24,7 @@ interface Props {
 /**
  * BOOTSTRAP MODAL
  */
-const ModalBootstrap: React.FC<Props> = ({
+const Modal: React.FC<Props> = ({
   id,
   title,
   overlayColor = 'rgba(0,0,0,0.7)',
@@ -148,4 +148,4 @@ const ModalBootstrap: React.FC<Props> = ({
   );
 };
 
-export default ModalBootstrap;
+export default Modal;

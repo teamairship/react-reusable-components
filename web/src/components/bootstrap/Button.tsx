@@ -6,18 +6,18 @@ export type ButtonType = 'primary' | 'secondary' | 'success' | 'danger' | 'warni
 
 type validChild = React.ReactChild | null;
 interface Props {
-  onClick?: React.ReactEventHandler,
-  children?: validChild | validChild[]
-  className?: string | object,
-  type?: ButtonType,
+  onClick?: React.ReactEventHandler | undefined,
+  children?: validChild | validChild[],
+  className?: string | object | undefined,
+  type?: ButtonType | undefined,
 }
 
-const ButtonBootstrap: React.FC<Props> = ({
+const Button = React.forwardRef(({
   className,
   children,
   onClick,
-  type,
-}) => {
+  type = 'secondary',
+}: Props, ref?: React.Ref<any>) => {
   const classNameType = type ? `btn-${type}` : '';
   return (
     <button
@@ -25,10 +25,11 @@ const ButtonBootstrap: React.FC<Props> = ({
       tabIndex={0}
       title='Open Nav Menu'
       onClick={onClick}
+      ref={ref}
     >
       {children}
     </button>
   );
-};
+});
 
-export default ButtonBootstrap;
+export default Button;
