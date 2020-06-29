@@ -27,6 +27,22 @@ const InteractablesPage = () => {
             Bootstrap Button
           </Button>
         </ExampleCode>
+        <ExampleCode>
+          <Button
+            type="primary"
+            onClick={() => { console.log('I am a bootstrapped button!') }}
+          >
+            Click me!
+          </Button>
+        </ExampleCode>
+        <ExampleCode>
+          <Button
+            type="warning"
+            onClick={() => { console.log('I am a bootstrapped button!') }}
+          >
+            Something important
+          </Button>
+        </ExampleCode>
       </ExampleSection>
 
       <LinkableTitle h2 className="mt-5 mb-4">

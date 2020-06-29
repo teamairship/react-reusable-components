@@ -20,7 +20,7 @@ function App() {
             </div>
           </Container>
         </div>
-        <footer className="App-footer">
+        <footer className="App-footer bg-light pt-3">
           <Container>
             <p>
               (c) Airship LLC
