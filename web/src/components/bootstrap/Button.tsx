@@ -12,12 +12,12 @@ interface Props {
   type?: ButtonType | undefined,
 }
 
-const Button = React.forwardRef(({
+const Button = React.forwardRef(function Button({
   className,
   children,
   onClick,
   type = 'secondary',
-}: Props, ref?: React.Ref<any>) => {
+}: Props, ref?: React.Ref<any>) {
   const classNameType = type ? `btn-${type}` : '';
   return (
     <button

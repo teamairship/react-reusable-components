@@ -10,6 +10,7 @@ import Button from '../../components/bootstrap/Button';
 import NavDrawer from '../../components/custom/NavDrawer';
 import cx from '../../utils/css/composeClassNames';
 import NavMenu from '../../components/custom/NavMenu';
+import Toggle from '../../components/custom/Toggle';
 
 const SiteHeaderLeft = () => {
   return (
@@ -35,7 +36,8 @@ const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({
   refNavToggle,
 }) => {
   return (
-    <div className="text-center my-4 my-md-0">
+    <div className="text-center my-4 my-md-0 d-md-flex align-items-center">
+      <Toggle className="mr-4" />
       <Button
         type="light"
         onClick={() => {
