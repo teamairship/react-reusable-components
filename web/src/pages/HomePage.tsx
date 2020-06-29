@@ -9,7 +9,7 @@ const HomePage = () => {
         This is a collection for React components, hooks, and utils.
       </p>
       <p className="mb-4">
-        Use the right navigation to find your way.
+        Use the right navigation to find your way. <a href="/">test</a>
       </p>
     </>
   );

@@ -23,7 +23,7 @@ interface Props {
 const Toggle: React.FC<Props> = ({
   id,
   className,
-  checked,
+  checked = false,
   onClick,
   label,
   labelPosition = 'before',
@@ -50,7 +50,7 @@ const Toggle: React.FC<Props> = ({
         <label htmlFor={_id}>{label}<NBSP /></label>
       ) : null}
       <label className="switch" htmlFor={_id}>
-        <input id={_id} type="checkbox" checked={_checked} onClick={handleClick} />
+        <input id={_id} type="checkbox" checked={_checked || checked} onClick={handleClick} />
         <span className="slider round"></span>
       </label>
       {label && labelPosition === 'after' ? (

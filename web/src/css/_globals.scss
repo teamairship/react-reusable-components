@@ -1,0 +1,23 @@
+
+@import './mixins';
+@import './colors';
+
+@include light-theme() {
+  a {
+    color: $LIGHT_THEME_LINK;
+
+    @include hover() {
+      color: darken($LIGHT_THEME_LINK, 10%);
+    }
+  }
+}
+
+@include dark-theme() {
+  a {
+    color: $DARK_THEME_LINK;
+
+    @include hover() {
+      color: darken($DARK_THEME_LINK, 10%);
+    }
+  }
+}

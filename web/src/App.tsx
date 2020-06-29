@@ -11,7 +11,7 @@ function App() {
     <Router>
       <div className="App d-flex flex-column justify-content-between">
         <SiteHeader />
-        <div className="App-main flex-grow-1 pt-4">
+        <div className="App-main theme-main theme-main-bg flex-grow-1 pt-4">
           <Container>
             <div className="App-content-body">
               {routes.map((route, index) => route.component ? (
@@ -20,7 +20,7 @@ function App() {
             </div>
           </Container>
         </div>
-        <footer className="App-footer bg-light pt-3">
+        <footer className="App-footer theme-footer theme-footer-bg pt-3">
           <Container>
             <p>
               (c) Airship LLC

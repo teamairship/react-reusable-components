@@ -11,6 +11,7 @@ import NavDrawer from '../../components/custom/NavDrawer';
 import cx from '../../utils/css/composeClassNames';
 import NavMenu from '../../components/custom/NavMenu';
 import Toggle from '../../components/custom/Toggle';
+import getDOMBody from '../../utils/dom/getDOMBody';
 
 const SiteHeaderLeft = () => {
   return (
@@ -35,9 +36,24 @@ const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({
   isShowingNav,
   refNavToggle,
 }) => {
+  const [isDarkTheme, setIsDarkTheme] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    if (isDarkTheme) {
+      getDOMBody().classList.add('dark-theme');
+    } else {
+      getDOMBody().classList.remove('dark-theme');
+    }
+  }, [isDarkTheme]);
+  const handleToggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
   return (
     <div className="text-center my-4 my-md-0 d-md-flex align-items-center">
-      <Toggle className="mr-4" />
+      <Toggle
+        className="mr-4"
+        onClick={handleToggleTheme}
+        checked={isDarkTheme}
+      />
       <Button
         type="light"
         onClick={() => {

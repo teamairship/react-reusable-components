@@ -1,0 +1,184 @@
+
+@mixin _foreground-color-class($className, $color) {
+  .#{$className} {
+    color: $color;
+  }
+  .#{$className}-dark {
+    color: darken($color, 10%);
+  }
+  .#{$className}-light {
+    color: lighten($color, 10%);
+  }
+}
+
+@mixin _background-color-class($className, $color) {
+  .#{$className}-bg {
+    background-color: $color;
+  }
+  .#{$className}-dark-bg {
+    background-color: darken($color, 10%);
+  }
+  .#{$className}-light-bg {
+    background-color: lighten($color, 10%);
+  }
+}
+
+@mixin _border-color-class($className, $color) {
+  .#{$className}-border {
+    border-color: $color;
+    outline-color: transparentize($color, 0.2);
+  }
+  .#{$className}-dark-border {
+    border-color: darken($color, 10%);
+    outline-color: transparentize(darken($color, 10%), 0.2);
+  }
+  .#{$className}-light-border {
+    border-color: lighten(lighten($color, 10%), 10%);
+    outline-color: transparentize(lighten($color, 10%), 0.2);
+  }
+}
+
+@mixin color-class($className, $colorFg: "__", $colorBg: "__", $colorBorder: "__") {
+  @if $colorFg != '__' {
+    @include _foreground-color-class($className, $colorFg);
+  }
+
+  @if $colorBg != '__' {
+    @include _background-color-class($className, $colorBg);
+  }
+
+  @if $colorBorder != '__' {
+    @include _border-color-class($className, $colorBorder);
+  }
+}
+
+// INTERNAL COLORS ( !!DO NOT USE THESE!! )
+$__BOOTSTRAP_COLOR_WHITE:    #FFF !default;
+$__BOOTSTRAP_COLOR_GRAY_100: #F8F9FA !default;
+$__BOOTSTRAP_COLOR_GRAY_200: #E9ECEF !default;
+$__BOOTSTRAP_COLOR_GRAY_300: #DEE2E6 !default;
+$__BOOTSTRAP_COLOR_GRAY_400: #CED4DA !default;
+$__BOOTSTRAP_COLOR_GRAY_500: #ADB5BD !default;
+$__BOOTSTRAP_COLOR_GRAY_600: #6C757D !default;
+$__BOOTSTRAP_COLOR_GRAY_700: #495057 !default;
+$__BOOTSTRAP_COLOR_GRAY_800: #343A40 !default;
+$__BOOTSTRAP_COLOR_GRAY_900: #212529 !default;
+$__BOOTSTRAP_COLOR_BLACK:    #000 !default;
+$__BOOTSTRAP_COLOR_BLUE:     #007BFF !default;
+$__BOOTSTRAP_COLOR_INDIGO:   #6610F2 !default;
+$__BOOTSTRAP_COLOR_PURPLE:   #6F42C1 !default;
+$__BOOTSTRAP_COLOR_PINK:     #E83E8C !default;
+$__BOOTSTRAP_COLOR_RED:      #DC3545 !default;
+$__BOOTSTRAP_COLOR_ORANGE:   #FD7E14 !default;
+$__BOOTSTRAP_COLOR_YELLOW:   #FFC107 !default;
+$__BOOTSTRAP_COLOR_GREEN:    #28A745 !default;
+$__BOOTSTRAP_COLOR_TEAL:     #20C997 !default;
+$__BOOTSTRAP_COLOR_CYAN:     #17A2B8 !default;
+$__CUSTOM_COLOR_BLACK:       #231f20;
+$__CUSTOM_COLOR_DARTH_VADER: #111010;
+$__CUSTOM_COLOR_GRAY_200:    #edf1f5;
+$__CUSTOM_COLOR_GRAY_MED:    #44474b;
+$__CUSTOM_COLOR_GRAY_DARK:   #23272D;
+$__CUSTOM_COLOR_BLUE:        #6B97A5;
+$__CUSTOM_COLOR_BLUE_SKY:    #61DAFB;
+$__CUSTOM_COLOR_GOLD:        #A59E6B;
+$__CUSTOM_COLOR_ORANGE_HARD: #FF6A07;
+$__CUSTOM_COLOR_ORANGE_SOFT: #e78544;
+$__CUSTOM_COLOR_RED_SOFT:    #D85A67 !default;
+
+//
+// LIGHT THEME VARS
+//
+$LIGHT_THEME_CLASS: 'light-theme';
+$LIGHT_THEME_BG: $__BOOTSTRAP_COLOR_GRAY_100;
+$LIGHT_THEME_FG: $__BOOTSTRAP_COLOR_GRAY_900;
+$LIGHT_THEME_BORDER: $__BOOTSTRAP_COLOR_GRAY_400;
+$LIGHT_THEME_HEADER_BG: $__CUSTOM_COLOR_GRAY_DARK;
+$LIGHT_THEME_HEADER_FG: $__BOOTSTRAP_COLOR_GRAY_100;
+$LIGHT_THEME_FOOTER_BG: $__CUSTOM_COLOR_GRAY_200;
+$LIGHT_THEME_FOOTER_FG: $__BOOTSTRAP_COLOR_GRAY_800;
+$LIGHT_THEME_NAV_BG: $__BOOTSTRAP_COLOR_GRAY_300;
+$LIGHT_THEME_NAV_FG: $__BOOTSTRAP_COLOR_GRAY_900;
+$LIGHT_THEME_NAV_BORDER: $__BOOTSTRAP_COLOR_GRAY_800;
+$LIGHT_THEME_ACCENT: $__BOOTSTRAP_COLOR_YELLOW;
+$LIGHT_THEME_ACCENT_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
+$LIGHT_THEME_LINK: $__BOOTSTRAP_COLOR_YELLOW;
+$LIGHT_THEME_SECONDARY: $__BOOTSTRAP_COLOR_GRAY_800;
+$LIGHT_THEME_SUCCESS: $__BOOTSTRAP_COLOR_YELLOW;
+$LIGHT_THEME_SUCCESS_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
+$LIGHT_THEME_WARNING: $__CUSTOM_COLOR_ORANGE_HARD;
+$LIGHT_THEME_WARNING_INVERT: $__BOOTSTRAP_COLOR_GRAY_100;
+$LIGHT_THEME_DANGER: $__BOOTSTRAP_COLOR_RED;
+$LIGHT_THEME_DANGER_INVERT: $__BOOTSTRAP_COLOR_GRAY_100;
+
+//
+// DARK THEME VARS
+//
+$DARK_THEME_CLASS: 'dark-theme';
+$DARK_THEME_BG: $__BOOTSTRAP_COLOR_GRAY_900;
+$DARK_THEME_FG: $__BOOTSTRAP_COLOR_GRAY_100;
+$DARK_THEME_BORDER: $__BOOTSTRAP_COLOR_GRAY_700;
+$DARK_THEME_HEADER_BG: $__CUSTOM_COLOR_GRAY_DARK;
+$DARK_THEME_HEADER_FG: $__BOOTSTRAP_COLOR_GRAY_100;
+$DARK_THEME_FOOTER_BG: $__BOOTSTRAP_COLOR_GRAY_800;
+$DARK_THEME_FOOTER_FG: $__BOOTSTRAP_COLOR_GRAY_100;
+$DARK_THEME_NAV_BG: $__CUSTOM_COLOR_DARTH_VADER;
+$DARK_THEME_NAV_FG: $__BOOTSTRAP_COLOR_GRAY_100;
+$DARK_THEME_NAV_BORDER: $__BOOTSTRAP_COLOR_GRAY_200;
+$DARK_THEME_ACCENT: $__BOOTSTRAP_COLOR_YELLOW;
+$DARK_THEME_ACCENT_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
+$DARK_THEME_LINK: $__BOOTSTRAP_COLOR_YELLOW;
+$DARK_THEME_SECONDARY: $__BOOTSTRAP_COLOR_GRAY_800;
+$DARK_THEME_SUCCESS: $__BOOTSTRAP_COLOR_YELLOW;
+$DARK_THEME_SUCCESS_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
+$DARK_THEME_WARNING: $__CUSTOM_COLOR_ORANGE_SOFT;
+$DARK_THEME_WARNING_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
+$DARK_THEME_DANGER: $__CUSTOM_COLOR_RED_SOFT;
+$DARK_THEME_DANGER_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
+
+@mixin light-theme() {
+  body,
+  body.#{$LIGHT_THEME_CLASS} {
+    @content;
+  }
+}
+
+@mixin dark-theme() {
+  body.#{$DARK_THEME_CLASS} {
+    @content;
+  }
+}
+
+@include light-theme() {
+  @include color-class('theme-main', $LIGHT_THEME_FG, $LIGHT_THEME_BG, $LIGHT_THEME_BORDER);
+  @include color-class('theme-header', $LIGHT_THEME_HEADER_FG, $LIGHT_THEME_HEADER_BG, $LIGHT_THEME_HEADER_BG);
+  @include color-class('theme-footer', $LIGHT_THEME_FOOTER_FG, $LIGHT_THEME_FOOTER_BG, $LIGHT_THEME_FOOTER_BG);
+  @include color-class('theme-nav', $LIGHT_THEME_NAV_FG, $LIGHT_THEME_NAV_BG, $LIGHT_THEME_NAV_BORDER);
+  @include color-class('theme-accent', $LIGHT_THEME_ACCENT, $LIGHT_THEME_ACCENT, $LIGHT_THEME_ACCENT);
+  @include color-class('theme-accent-invert', $LIGHT_THEME_ACCENT_INVERT, $LIGHT_THEME_ACCENT_INVERT, $LIGHT_THEME_ACCENT_INVERT);
+  @include color-class('theme-link', $LIGHT_THEME_LINK, $LIGHT_THEME_LINK, $LIGHT_THEME_LINK);
+  @include color-class('theme-secondary', $LIGHT_THEME_SECONDARY, $LIGHT_THEME_SECONDARY, $LIGHT_THEME_SECONDARY);
+  @include color-class('theme-success', $LIGHT_THEME_SUCCESS, $LIGHT_THEME_SUCCESS, $LIGHT_THEME_SUCCESS);
+  @include color-class('theme-success-invert', $LIGHT_THEME_SUCCESS_INVERT, $LIGHT_THEME_SUCCESS_INVERT, $LIGHT_THEME_SUCCESS_INVERT);
+  @include color-class('theme-warning', $LIGHT_THEME_WARNING, $LIGHT_THEME_WARNING, $LIGHT_THEME_WARNING);
+  @include color-class('theme-warning-invert', $LIGHT_THEME_WARNING_INVERT, $LIGHT_THEME_WARNING_INVERT, $LIGHT_THEME_WARNING_INVERT);
+  @include color-class('theme-danger', $LIGHT_THEME_DANGER, $LIGHT_THEME_DANGER, $LIGHT_THEME_DANGER);
+  @include color-class('theme-danger-invert', $LIGHT_THEME_DANGER_INVERT, $LIGHT_THEME_DANGER_INVERT, $LIGHT_THEME_DANGER_INVERT);
+}
+
+@include dark-theme() {
+  @include color-class('theme-main', $DARK_THEME_FG, $DARK_THEME_BG, $DARK_THEME_BORDER);
+  @include color-class('theme-header', $DARK_THEME_HEADER_FG, $DARK_THEME_HEADER_BG, $DARK_THEME_HEADER_BG);
+  @include color-class('theme-footer', $DARK_THEME_FOOTER_FG, $DARK_THEME_FOOTER_BG, $DARK_THEME_FOOTER_BG);
+  @include color-class('theme-nav', $DARK_THEME_NAV_FG, $DARK_THEME_NAV_BG, $DARK_THEME_NAV_BORDER);
+  @include color-class('theme-accent', $DARK_THEME_ACCENT, $DARK_THEME_ACCENT, $DARK_THEME_ACCENT);
+  @include color-class('theme-accent-invert', $DARK_THEME_ACCENT_INVERT, $DARK_THEME_ACCENT_INVERT, $DARK_THEME_ACCENT_INVERT);
+  @include color-class('theme-link', $DARK_THEME_LINK, $DARK_THEME_LINK, $DARK_THEME_LINK);
+  @include color-class('theme-secondary', $DARK_THEME_SECONDARY, $DARK_THEME_SECONDARY, $DARK_THEME_SECONDARY);
+  @include color-class('theme-success', $DARK_THEME_SUCCESS, $DARK_THEME_SUCCESS, $DARK_THEME_SUCCESS);
+  @include color-class('theme-success-invert', $DARK_THEME_SUCCESS_INVERT, $DARK_THEME_SUCCESS_INVERT, $DARK_THEME_SUCCESS_INVERT);
+  @include color-class('theme-warning', $DARK_THEME_WARNING, $DARK_THEME_WARNING, $DARK_THEME_WARNING);
+  @include color-class('theme-warning-invert', $DARK_THEME_WARNING_INVERT, $DARK_THEME_WARNING_INVERT, $DARK_THEME_WARNING_INVERT);
+  @include color-class('theme-danger', $DARK_THEME_DANGER, $DARK_THEME_DANGER, $DARK_THEME_DANGER);
+  @include color-class('theme-danger-invert', $DARK_THEME_DANGER_INVERT, $DARK_THEME_DANGER_INVERT, $DARK_THEME_DANGER_INVERT);
+}
