@@ -1,4 +1,6 @@
 
+@import '../../css/colors';
+
 .App-logo {
   height: 40px;
   pointer-events: none;
@@ -41,6 +43,7 @@
   letter-spacing: 0.2em;
   padding-right: 10px;
   margin-bottom: 0;
+  color: #fff;
 
   a {
     color: white;
@@ -73,7 +76,14 @@
   }
 
   &.active {
-    color: white;
     font-weight: bold;
+
+    @include light-theme() {
+      color: $LIGHT_THEME_ACCENT_INVERT;
+    }
+
+    @include dark-theme() {
+      color: $DARK_THEME_ACCENT_INVERT;
+    }
   }
 }

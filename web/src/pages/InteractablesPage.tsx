@@ -22,7 +22,6 @@ const InteractablesPage = () => {
         <ExampleCode>
           <Button
             type="dark"
-            onClick={() => { console.log('I am a bootstrapped button!') }}
           >
             Bootstrap Button
           </Button>
@@ -30,7 +29,6 @@ const InteractablesPage = () => {
         <ExampleCode>
           <Button
             type="primary"
-            onClick={() => { console.log('I am a bootstrapped button!') }}
           >
             Click me!
           </Button>
@@ -38,7 +36,6 @@ const InteractablesPage = () => {
         <ExampleCode>
           <Button
             type="warning"
-            onClick={() => { console.log('I am a bootstrapped button!') }}
           >
             Something important
           </Button>

@@ -22,7 +22,9 @@ const NavItem: React.FC<NavItemProps> = ({
       <a
         href={route.path}
         className={cx('nav-menu-link', {
-          active: route.path === history.location.pathname
+          active: route.path === history.location.pathname,
+          'theme-accent': route.path !== history.location.pathname,
+          'theme-nav': route.path === history.location.pathname,
         })}
         onClick={(ev) => {
           ev.preventDefault();

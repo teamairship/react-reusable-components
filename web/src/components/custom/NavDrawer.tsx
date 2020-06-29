@@ -90,7 +90,7 @@ const NavDrawer: React.FC<Props> = ({
   const classNameSlideOver = animationType === 'slideOver' ? CLASSNAME_NAV_ANIMATE_SLIDE_OVER : '';
 
   return (
-    <div className={cx('nav-drawer', classNameSlideOver, classNameShow)}>
+    <div className={cx('nav-drawer theme-nav theme-nav-bg', classNameSlideOver, classNameShow)}>
       <div className="position-relative d-flex flex-column justify-content-stretch">
         <button
           type="button"

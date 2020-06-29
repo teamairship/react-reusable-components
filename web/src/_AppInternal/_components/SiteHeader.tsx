@@ -18,7 +18,7 @@ const SiteHeaderLeft = () => {
     <div className="d-flex flex-row align-items-center justify-content-center justify-content-md-between">
       <img src={reactLogo} className="App-logo" alt="airship logo" />
       <h1 className="App-name">
-        <Link to="/">
+        <Link to="/" className="text-reset">
           REACT REUSABLE <br className="d-md-none"/>COMPONENTS
         </Link>
       </h1>

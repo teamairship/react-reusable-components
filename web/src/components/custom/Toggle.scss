@@ -1,6 +1,8 @@
 
+@import '../../css/colors';
+
 $SLIDER_COLOR_OFF: #ccc;
-$SLIDER_COLOR_ON: #2196F3;
+$SLIDER_COLOR_ON: $LIGHT_THEME_ACCENT;
 
 .switch-container label {
   margin: 0;

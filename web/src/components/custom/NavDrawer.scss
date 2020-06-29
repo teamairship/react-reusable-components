@@ -20,8 +20,6 @@ $CLASSNAME_NAV_ANIMATE_SLIDE_OVER: 'animate-slide-over';
   left: 100%;
   top: 0;
   bottom: 0;
-  background-color: black;
-  color: white;
   min-width: $NAV_WIDTH_SM;
   padding: 15px 30px;
 
@@ -51,7 +49,7 @@ $CLASSNAME_NAV_ANIMATE_SLIDE_OVER: 'animate-slide-over';
 }
 
 .nav-drawer.#{$CLASSNAME_NAV_ANIMATE_SLIDE_OVER} {
-  @include transition(left $DRAWER_SPEED $EASING);
+  @include transition(left $DRAWER_SPEED $EASING !important);
 
   &.#{$CLASSNAME_NAV_SHOWING} {
     left: calc(100% - #{$NAV_WIDTH_SM});
