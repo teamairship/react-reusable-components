@@ -4,6 +4,15 @@ In this directory you can find web-only React components/hooks/utils.
 
 - [Back to project root](https://github.com/teamairship/react-reusable-components)
 
+## Experimental Features
+
+### Tailwind CSS
+
+Tailwind CSS was installed into this Create React App project by following these resources:
+
+- [https://tailwindcss.com/docs/installation/](https://tailwindcss.com/docs/installation/)
+- [https://blog.logrocket.com/create-react-app-and-tailwindcss/](https://blog.logrocket.com/create-react-app-and-tailwindcss/)
+
 -----------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

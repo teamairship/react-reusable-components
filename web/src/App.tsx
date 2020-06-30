@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 import './App.scss';
+import './styles/tailwind.css';
+
 import SiteHeader from './_AppInternal/_components/SiteHeader';
 import routes from './routes';
 import Container from './_AppInternal/_components/Container';
