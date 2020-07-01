@@ -1,13 +1,5 @@
 
-// @ts-ignore
-import chroma from 'chroma-js';
-
-const transparentize = (color: string, amount = 0) => {
-  let boundedAmount = 1 - amount;
-  if (boundedAmount > 1) boundedAmount = 1;
-  if (boundedAmount < 0) boundedAmount = 0;
-  return chroma(color).alpha(boundedAmount).css();
-}
+import { transparentize, processTheme, ProcessedTheme } from '../utils/css/zeroThemeUtils';
 
 export const colors = {
   black: '#000',
@@ -124,8 +116,9 @@ export const colors = {
   },
 };
 
-const THEME_PRIMARY = 'primary';
-const THEME_DARK = 'dark';
+export const THEME_PRIMARY = 'primary';
+export const THEME_DARK = 'dark';
+export const THEME_DARK_CSS_CLASS = 'dark-theme';
 
 export const theme = {
   [THEME_PRIMARY]: {
@@ -172,81 +165,7 @@ export const theme = {
   },
 };
 
-const COLOR_TRANSITION_TIME = '100ms';
-
-function sassColorClass(classPrefix: string = '', name: string, color: string, prop = 'color') {
-  const prefix = name ? "theme-" : 'theme';
-  return `${classPrefix}.${prefix}${name} { ${prop}: ${color}; transition: ${prop} ${COLOR_TRANSITION_TIME} ease-in-out }`;
-}
-
-function sassColorClasses(classPrefix: string = '', name: string = '', color: string = '') {
-  if (!name) return '';
-  if (/text$/i.test(name)) return sassColorClass(classPrefix, name.replace(/-{0,1}text$/i, ''), color, 'color');
-  if (/bg$/i.test(name)) return sassColorClass(classPrefix, name, color, 'background-color');
-  if (/border$/i.test(name)) return sassColorClass(classPrefix, name, color, 'border-color');
-  return [
-    sassColorClass(classPrefix, name.replace(/-{0,1}text$/i, ''), color, 'color'),
-    sassColorClass(classPrefix, `${name}-bg`, color, 'background-color'),
-    sassColorClass(classPrefix, `${name}-border`, color, 'border-color'),
-  ].join('\n');
-}
-
-function sassVariable(name: string, value: string) {
-  return "$" + name + ": " + value + ";";
-}
-
-function mapVariables(vars: any = {}, prefix: string = ''): { key: string, value: string }[] {
-  return Object.keys(vars).map((key) => {
-    if (typeof vars[key] === 'string') {
-      return {
-        key: `${prefix}${key}`,
-        value: vars[key],
-      }
-    }
-    if (typeof vars[key] === 'object') {
-      return mapVariables(vars[key], `${prefix}${key}-`);
-    }
-    return { key: '', value: '' };
-  }).flat().filter(v => v && v.key);
-}
-
-function getColorClassPrefix(theme: string) {
-  if (!theme) return '';
-  switch (theme) {
-    case THEME_PRIMARY:
-      return 'body ';
-    default:
-      return `body.${theme}-theme `;
-  }
-}
-
-function getThemeColorScss(theme: string = '', vars: any = {}): string {
-  const pairs = mapVariables(vars);
-  const colorClassPrefix = getColorClassPrefix(theme);
-  const classes = pairs.map(({ key, value }) => sassColorClasses(colorClassPrefix, key, value)).join('\n');
-  return classes;
-}
-
-interface ProcessedTheme {
-  css: string,
-}
-function processTheme(): ProcessedTheme {
-  const defaultReturn = {
-    css: '',
-  };
-  if (typeof theme !== 'object') return defaultReturn;
-
-  const themeKeys = Object.keys(theme);
-  // @ts-ignore
-  const css: string = themeKeys.map(themeKey => getThemeColorScss(themeKey, theme[themeKey]?.colors)).join('\n');
-
-  return {
-    css,
-  };
-}
-
-export const processedTheme: ProcessedTheme = processTheme();
-
-function sassImport(path: string) {
-  return "@import '" + path + "';";
-}
+export const processedTheme: ProcessedTheme = processTheme(theme, {
+  primaryThemeKey: 'primary',
+  colorTransitionTime: 100,
+});

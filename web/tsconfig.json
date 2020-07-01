@@ -4,6 +4,9 @@
     "lib": [
       "dom",
       "dom.iterable",
+      "es2017",
+      "es2015",
+      "es6",
       "esnext"
     ],
     "allowJs": true,
@@ -21,6 +24,7 @@
     "noImplicitAny": false
   },
   "include": [
-    "src"
+    "src",
+    "cli"
   ]
 }
