@@ -12,12 +12,13 @@ import cx from '../../utils/css/composeClassNames';
 import NavMenu from '../../components/custom/NavMenu';
 import Toggle from '../../components/custom/Toggle';
 import getDOMBody from '../../utils/dom/getDOMBody';
+import { THEME_DARK_CSS_CLASS } from '../../css/zero.theme';
 
 const SiteHeaderLeft = () => {
   return (
     <div className="d-flex flex-row align-items-center justify-content-center justify-content-md-between">
       <img src={reactLogo} className="App-logo" alt="airship logo" />
-      <h1 className="App-name">
+      <h1 className="App-name text-reset">
         <Link to="/" className="text-reset">
           REACT REUSABLE <br className="d-md-none"/>COMPONENTS
         </Link>
@@ -39,9 +40,9 @@ const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({
   const [isDarkTheme, setIsDarkTheme] = React.useState<boolean>(false);
   React.useEffect(() => {
     if (isDarkTheme) {
-      getDOMBody().classList.add('dark-theme');
+      getDOMBody().classList.add(THEME_DARK_CSS_CLASS);
     } else {
-      getDOMBody().classList.remove('dark-theme');
+      getDOMBody().classList.remove(THEME_DARK_CSS_CLASS);
     }
   }, [isDarkTheme]);
   const handleToggleTheme = () => {
@@ -75,7 +76,7 @@ const SiteHeader = () => {
   const refNavToggle = React.useRef(null);
   return (
     <>
-      <header className="App-header">
+      <header className="App-header theme-header theme-header-bg">
         <Container className="d-block d-md-flex align-items-center justify-content-between">
           <SiteHeaderLeft />
           <SiteHeaderRight toggleNav={toggleNav} isShowingNav={isShowingNav} refNavToggle={refNavToggle} />

@@ -1,5 +1,5 @@
 
-import { transparentize, processTheme, ProcessedTheme } from '../utils/css/zeroThemeUtils';
+import { transparentize, processTheme, ProcessedTheme, darken } from '../utils/css/zeroThemeUtils';
 
 export const colors = {
   black: '#000',
@@ -139,7 +139,7 @@ export const theme = {
         bg: transparentize(colors.gray[200], 0.05),
         text: colors.gray[800],
       },
-      accent: 'pink',
+      accent: colors.teal[600],
     },
   },
   [THEME_DARK]: {
@@ -149,23 +149,23 @@ export const theme = {
         text: colors.gray[100],
       },
       header: {
-        bg: colors.gray[800],
+        bg: darken(colors.gray[800], 0.2),
         text: colors.gray[100],
       },
       footer: {
-        bg: colors.gray[800],
+        bg: darken(colors.gray[800], 0.4),
         text: colors.gray[200],
       },
       nav: {
-        bg: transparentize(colors.gray[200], 0.05),
-        text: colors.gray[800],
+        bg: transparentize(colors.gray[900], 0.05),
+        text: colors.gray[100],
       },
-      accent: 'pink',
+      accent: colors.teal[400],
     },
   },
 };
 
 export const processedTheme: ProcessedTheme = processTheme(theme, {
   primaryThemeKey: 'primary',
-  colorTransitionTime: 100,
+  colorTransitionTime: 200,
 });

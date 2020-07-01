@@ -13,29 +13,29 @@
 /** _________________________________________________________ **/
 
 body {
-  .theme-main-bg { background-color: #f7fafc; transition: background-color 100ms ease-in-out }
-  .theme-main { color: #1a202c; transition: color 100ms ease-in-out }
-  .theme-header-bg { background-color: #2d3748; transition: background-color 100ms ease-in-out }
-  .theme-header { color: #f7fafc; transition: color 100ms ease-in-out }
-  .theme-footer-bg { background-color: #edf2f7; transition: background-color 100ms ease-in-out }
-  .theme-footer { color: #2d3748; transition: color 100ms ease-in-out }
-  .theme-nav-bg { background-color: rgba(237,242,247,0.95); transition: background-color 100ms ease-in-out }
-  .theme-nav { color: #2d3748; transition: color 100ms ease-in-out }
-  .theme-accent { color: pink; transition: color 100ms ease-in-out }
-  .theme-accent-bg { background-color: pink; transition: background-color 100ms ease-in-out }
-  .theme-accent-border { border-color: pink; transition: border-color 100ms ease-in-out }
+  .theme-main-bg { background-color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme-main { color: #1a202c; transition: all 100ms ease-in-out }
+  .theme-header-bg { background-color: #2d3748; transition: all 100ms ease-in-out }
+  .theme-header { color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme-footer-bg { background-color: #edf2f7; transition: all 100ms ease-in-out }
+  .theme-footer { color: #2d3748; transition: all 100ms ease-in-out }
+  .theme-nav-bg { background-color: rgba(237,242,247,0.95); transition: all 100ms ease-in-out }
+  .theme-nav { color: #2d3748; transition: all 100ms ease-in-out }
+  .theme-accent { color: #319795; transition: all 100ms ease-in-out }
+  .theme-accent-bg { background-color: #319795; transition: all 100ms ease-in-out }
+  .theme-accent-border { border-color: #319795; transition: all 100ms ease-in-out }
 }
 
 body.dark-theme {
-  .theme-main-bg { background-color: #1a202c; transition: background-color 100ms ease-in-out }
-  .theme-main { color: #f7fafc; transition: color 100ms ease-in-out }
-  .theme-header-bg { background-color: #2d3748; transition: background-color 100ms ease-in-out }
-  .theme-header { color: #f7fafc; transition: color 100ms ease-in-out }
-  .theme-footer-bg { background-color: #2d3748; transition: background-color 100ms ease-in-out }
-  .theme-footer { color: #edf2f7; transition: color 100ms ease-in-out }
-  .theme-nav-bg { background-color: rgba(237,242,247,0.95); transition: background-color 100ms ease-in-out }
-  .theme-nav { color: #2d3748; transition: color 100ms ease-in-out }
-  .theme-accent { color: pink; transition: color 100ms ease-in-out }
-  .theme-accent-bg { background-color: pink; transition: background-color 100ms ease-in-out }
-  .theme-accent-border { border-color: pink; transition: border-color 100ms ease-in-out }
+  .theme-main-bg { background-color: #1a202c; transition: all 100ms ease-in-out }
+  .theme-main { color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme-header-bg { background-color: rgb(37,47,64); transition: all 100ms ease-in-out }
+  .theme-header { color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme-footer-bg { background-color: rgb(29,40,56); transition: all 100ms ease-in-out }
+  .theme-footer { color: #edf2f7; transition: all 100ms ease-in-out }
+  .theme-nav-bg { background-color: rgba(26,32,44,0.95); transition: all 100ms ease-in-out }
+  .theme-nav { color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme-accent { color: #4fd1c5; transition: all 100ms ease-in-out }
+  .theme-accent-bg { background-color: #4fd1c5; transition: all 100ms ease-in-out }
+  .theme-accent-border { border-color: #4fd1c5; transition: all 100ms ease-in-out }
 }

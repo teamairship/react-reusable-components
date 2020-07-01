@@ -1,32 +1,25 @@
 
 // @ts-ignore
 import chroma from 'chroma-js';
-
-// Array.prototype.flat polyfill - shamelessly borrowed from https://github.com/jonathantneal/array-flat-polyfill/blob/master/src/polyfill-flat.js
-if (!Array.prototype.flat) {
-	Object.defineProperty(Array.prototype, 'flat', {
-		configurable: true,
-		value: function flat () {
-			var depth = isNaN(arguments[0]) ? 1 : Number(arguments[0]);
-			return depth ? Array.prototype.reduce.call(this, function (acc: any, cur) {
-				if (Array.isArray(cur)) {
-          // @ts-ignore
-					acc.push.apply(acc, flat.call(cur, depth - 1));
-				} else {
-					acc.push(cur);
-				}
-				return acc;
-			}, []) : Array.prototype.slice.call(this);
-		},
-		writable: true
-	});
-}
+import '../polyfills/Array.prototype.flat';
 
 export const transparentize = (color: string, amount = 0) => {
   let boundedAmount = 1 - amount;
   if (boundedAmount > 1) boundedAmount = 1;
   if (boundedAmount < 0) boundedAmount = 0;
   return chroma(color).alpha(boundedAmount).css();
+}
+
+export const darken = (color: string, amount = 0) => {
+  let boundedAmount = amount;
+  if (boundedAmount < 0) boundedAmount = 0;
+  return chroma(color).darken(boundedAmount).css();
+}
+
+export const lighten = (color: string, amount = 0) => {
+  let boundedAmount = amount;
+  if (boundedAmount < 0) boundedAmount = 0;
+  return chroma(color).brighten(boundedAmount).css();
 }
 
 export interface ProcessedTheme {
@@ -70,7 +63,8 @@ function generateSassVariable(name: string, value: string) {
 function generateColorClass(cssPrefix: string = '', name: string, color: string, prop = 'color', options: ProcessThemeOptions = {}) {
   const classPrefix = name ? "theme-" : 'theme';
   const transitionTime = `${(options.colorTransitionTime || DEFAULT_COLOR_TRANSITION_TIME)}ms`;
-  return `${cssPrefix}.${classPrefix}${name} { ${prop}: ${color}; transition: ${prop} ${transitionTime} ease-in-out }`;
+  const transitionProp = 'all';
+  return `${cssPrefix}.${classPrefix}${name} { ${prop}: ${color}; transition: ${transitionProp} ${transitionTime} ease-in-out }`;
 }
 
 function generateColorClasses(cssPrefix: string = '', name: string = '', color: string = '', options: ProcessThemeOptions = {}): string {
@@ -114,7 +108,7 @@ function getColorThemePrefix(theme: string, options: ProcessThemeOptions = {}): 
 function compileThemeCss(theme: string = '', colorMap: any = {}, options: ProcessThemeOptions = {}): string {
   const colorValuePairs = parseColorMap(colorMap);
   const colorThemeCssPrefix = getColorThemePrefix(theme, options);
-  const colorClasses: string = colorValuePairs.map(({ key, value }) => generateColorClasses(colorThemeCssPrefix, key, value)).join('\n');
+  const colorClasses: string = colorValuePairs.map(({ key, value }) => generateColorClasses(colorThemeCssPrefix, key, value, options)).join('\n');
   if (options.sass) {
     let bodySelector = 'body';
     if (theme !== (options.primaryThemeKey || 'primary')) {
