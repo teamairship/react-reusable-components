@@ -5,8 +5,19 @@ import './App.scss';
 import SiteHeader from './_AppInternal/_components/SiteHeader';
 import routes from './routes';
 import Container from './_AppInternal/_components/Container';
+import { processedTheme, theme } from './zero.theme';
+import injectDOMStyle from './utils/dom/injectDOMStyle';
 
 function App() {
+
+  React.useEffect(() => {
+
+    console.log(theme);
+
+    // load stylesheet
+    injectDOMStyle(processedTheme.css);
+  }, []);
+
   return (
     <Router>
       <div className="App d-flex flex-column justify-content-between">

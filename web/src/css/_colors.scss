@@ -1,4 +1,12 @@
 
+/**
+ * THEME COLORS
+ *
+ * To modify color scales - see this link: https://gka.github.io/palettes/#/9|s|00429d,96ffea,ffffe0|ffffe0,ff005e,93003a|1|1
+ */
+
+@use "sass:map";
+
 @import './mixins';
 
 $__COLOR_TRANSITION_TIME: 100ms;
@@ -64,6 +72,169 @@ $__COLOR_TRANSITION_TIME: 100ms;
     @include _border-color-class($className, $colorBorder);
   }
 }
+
+// $__INTERNAL_COLORS: (
+//   "white":    #fff,
+//   "black":    #000,
+// );
+
+// @mixin add-color-scale($colorName, $colors...) {
+//   $i: 100;
+//   @each $color in $colors {
+//     $__INTERNAL_COLORS: map.merge($__INTERNAL_COLORS, ("#{$colorName}-${$i}": $color)) !global;
+//     $i: $i + 100;
+//   }
+// }
+
+// @include add-color-scale(
+//   'blue',
+//   '#23272d',
+//   '#2f3a41',
+//   '#3c4e57',
+//   '#47636e',
+//   '#527987',
+//   '#5b90a1',
+//   '#62a8bd',
+//   '#65c0db',
+//   '#61dafb'
+// );
+
+// USAGE: `map.get($theme-colors, "white")`
+// INTERNAL COLORS
+  $white:    #fff;
+  $black:    #000;
+  // gray - https://gka.github.io/palettes/#/9|s|00429d,96ffea,ffffe0|ffffe0,ff005e,93003a|1|1
+  $gray_100: #f8f9fa;
+  $gray_200: #e9ecef;
+  $gray_300: #ced4da;
+  $gray_400: #adb5bd;
+  $gray_500: #6c757d;
+  $gray_600: #495057;
+  $gray_700: #343a40;
+  $gray_800: #231f20;
+  $gray_900: #111010;
+  // blue - https://gka.github.io/palettes/#/9|s|23272d,6b97a5,61dafb|ffffe0,ff005e,93003a|1|1
+  $blue100: #61dafb;
+  $blue200: #65c0db;
+  $blue300: #62a8bd;
+  $blue400: #5b90a1;
+  $blue500: #527987;
+  $blue600: #47636e;
+  $blue700: #3c4e57;
+  $blue800: #2f3a41;
+  $blue900: #23272d;
+  // red  https://gka.github.io/palettes/#/9|s|742a2a,dc3545,d85a67,fe8a7e|ffffe0,ff005e,93003a|1|1
+  $red100__:  #fe8a7e;
+  $red200:  #f27975;
+  $red300:  #e66869;
+  $red400:  #d9565c;
+  $red500:  #ca474f;
+  $red600:  #b83c43;
+  $red700:  #a23439;
+  $red800:  #8c2e31;
+  $red900:  #742a2a;
+  // yellow  https://gka.github.io/palettes/#/9|s|4b2700,ff8d1a,ffc107,fff969,ffffcf|ffffe0,ff005e,93003a|0|1
+  $yellow100: #ffffcf;
+  $yellow200: #fff9a0;
+  $yellow300: #ffed73;
+  $yellow400: #ffda46;
+  $yellow500: #ffc107;
+  $yellow600: #f3a311;
+  $yellow700: #cf7e11;
+  $yellow800: #95540c;
+  $yellow900: #4b2700;
+  // teal  https://gka.github.io/palettes/#/9|s|17a2b8|ffffe0,ff005e,93003a|0|1
+  $teal100: #8afaff;
+  $teal200: #69dcf3;
+  $teal300: #47bfd5;
+  $teal400: #17a2b8;
+  $teal500: #00869c;
+  $teal600: #006b80;
+  $teal700: #005266;
+  $teal800: #00394d;
+  $teal900: #002335;
+  // other
+  $indigo:   #6610f2;
+  $purple:   #6f42c1;
+  $pink:     #e83e8c;
+  $red:      #dc3545;
+  $orange:   #fd7e14;
+  $yellow:   #ffc107;
+  $green:    #28a745;
+  $teal:     #20c997;
+  $cyan:     #17a2b8;
+
+$_INTERNAL_COLORS: (
+  "white":    #fff,
+  "black":    #000,
+
+  // gray - https://gka.github.io/palettes/#/9|s|00429d,96ffea,ffffe0|ffffe0,ff005e,93003a|1|1
+  "gray_100": #f8f9fa,
+  "gray_200": #e9ecef,
+  "gray_300": #ced4da,
+  "gray_400": #adb5bd,
+  "gray_500": #6c757d,
+  "gray_600": #495057,
+  "gray_700": #343a40,
+  "gray_800": #231f20,
+  "gray_900": #111010,
+
+  // blue - https://gka.github.io/palettes/#/9|s|23272d,6b97a5,61dafb|ffffe0,ff005e,93003a|1|1
+  "blue-100": #61dafb,
+  "blue-200": #65c0db,
+  "blue-300": #62a8bd,
+  "blue-400": #5b90a1,
+  "blue-500": #527987,
+  "blue-600": #47636e,
+  "blue-700": #3c4e57,
+  "blue-800": #2f3a41,
+  "blue-900": #23272d,
+
+  // red - https://gka.github.io/palettes/#/9|s|742a2a,dc3545,d85a67,fe8a7e|ffffe0,ff005e,93003a|1|1
+  "red-100":  #fe8a7e,
+  "red-200":  #f27975,
+  "red-300":  #e66869,
+  "red-400":  #d9565c,
+  "red-500":  #ca474f,
+  "red-600":  #b83c43,
+  "red-700":  #a23439,
+  "red-800":  #8c2e31,
+  "red-900":  #742a2a,
+
+  // yellow - https://gka.github.io/palettes/#/9|s|4b2700,ff8d1a,ffc107,fff969,ffffcf|ffffe0,ff005e,93003a|0|1
+  "yellow-100": #ffffcf,
+  "yellow-200": #fff9a0,
+  "yellow-300": #ffed73,
+  "yellow-400": #ffda46,
+  "yellow-500": #ffc107,
+  "yellow-600": #f3a311,
+  "yellow-700": #cf7e11,
+  "yellow-800": #95540c,
+  "yellow-900": #4b2700,
+
+  // teal - https://gka.github.io/palettes/#/9|s|17a2b8|ffffe0,ff005e,93003a|0|1
+  "teal-100": #8afaff,
+  "teal-200": #69dcf3,
+  "teal-300": #47bfd5,
+  "teal-400": #17a2b8,
+  "teal-500": #00869c,
+  "teal-600": #006b80,
+  "teal-700": #005266,
+  "teal-800": #00394d,
+  "teal-900": #002335,
+
+  // other
+  "indigo":   #6610f2,
+  "purple":   #6f42c1,
+  "pink":     #e83e8c,
+  "red":      #dc3545,
+  "orange":   #fd7e14,
+  "yellow":   #ffc107,
+  "green":    #28a745,
+  "teal":     #20c997,
+  "cyan":     #17a2b8,
+);
+
 
 // INTERNAL COLORS ( !!DO NOT USE THESE!! )
 $__BOOTSTRAP_COLOR_WHITE:    #FFF !default;
@@ -162,36 +333,36 @@ $DARK_THEME_DANGER_INVERT: $__BOOTSTRAP_COLOR_GRAY_900;
   }
 }
 
-@include light-theme() {
-  @include color-class('theme-main', $LIGHT_THEME_FG, $LIGHT_THEME_BG, $LIGHT_THEME_BORDER);
-  @include color-class('theme-header', $LIGHT_THEME_HEADER_FG, $LIGHT_THEME_HEADER_BG, $LIGHT_THEME_HEADER_BG);
-  @include color-class('theme-footer', $LIGHT_THEME_FOOTER_FG, $LIGHT_THEME_FOOTER_BG, $LIGHT_THEME_FOOTER_BG);
-  @include color-class('theme-nav', $LIGHT_THEME_NAV_FG, $LIGHT_THEME_NAV_BG, $LIGHT_THEME_NAV_BORDER);
-  @include color-class('theme-accent', $LIGHT_THEME_ACCENT, $LIGHT_THEME_ACCENT, $LIGHT_THEME_ACCENT);
-  @include color-class('theme-accent-invert', $LIGHT_THEME_ACCENT_INVERT, $LIGHT_THEME_ACCENT_INVERT, $LIGHT_THEME_ACCENT_INVERT);
-  @include color-class('theme-link', $LIGHT_THEME_LINK, $LIGHT_THEME_LINK, $LIGHT_THEME_LINK);
-  @include color-class('theme-secondary', $LIGHT_THEME_SECONDARY, $LIGHT_THEME_SECONDARY, $LIGHT_THEME_SECONDARY);
-  @include color-class('theme-success', $LIGHT_THEME_SUCCESS, $LIGHT_THEME_SUCCESS, $LIGHT_THEME_SUCCESS);
-  @include color-class('theme-success-invert', $LIGHT_THEME_SUCCESS_INVERT, $LIGHT_THEME_SUCCESS_INVERT, $LIGHT_THEME_SUCCESS_INVERT);
-  @include color-class('theme-warning', $LIGHT_THEME_WARNING, $LIGHT_THEME_WARNING, $LIGHT_THEME_WARNING);
-  @include color-class('theme-warning-invert', $LIGHT_THEME_WARNING_INVERT, $LIGHT_THEME_WARNING_INVERT, $LIGHT_THEME_WARNING_INVERT);
-  @include color-class('theme-danger', $LIGHT_THEME_DANGER, $LIGHT_THEME_DANGER, $LIGHT_THEME_DANGER);
-  @include color-class('theme-danger-invert', $LIGHT_THEME_DANGER_INVERT, $LIGHT_THEME_DANGER_INVERT, $LIGHT_THEME_DANGER_INVERT);
-}
+// @include light-theme() {
+//   @include color-class('theme-main', $LIGHT_THEME_FG, $LIGHT_THEME_BG, $LIGHT_THEME_BORDER);
+//   @include color-class('theme-header', $LIGHT_THEME_HEADER_FG, $LIGHT_THEME_HEADER_BG, $LIGHT_THEME_HEADER_BG);
+//   @include color-class('theme-footer', $LIGHT_THEME_FOOTER_FG, $LIGHT_THEME_FOOTER_BG, $LIGHT_THEME_FOOTER_BG);
+//   @include color-class('theme-nav', $LIGHT_THEME_NAV_FG, $LIGHT_THEME_NAV_BG, $LIGHT_THEME_NAV_BORDER);
+//   @include color-class('theme-accent', $LIGHT_THEME_ACCENT, $LIGHT_THEME_ACCENT, $LIGHT_THEME_ACCENT);
+//   @include color-class('theme-accent-invert', $LIGHT_THEME_ACCENT_INVERT, $LIGHT_THEME_ACCENT_INVERT, $LIGHT_THEME_ACCENT_INVERT);
+//   @include color-class('theme-link', $LIGHT_THEME_LINK, $LIGHT_THEME_LINK, $LIGHT_THEME_LINK);
+//   @include color-class('theme-secondary', $LIGHT_THEME_SECONDARY, $LIGHT_THEME_SECONDARY, $LIGHT_THEME_SECONDARY);
+//   @include color-class('theme-success', $LIGHT_THEME_SUCCESS, $LIGHT_THEME_SUCCESS, $LIGHT_THEME_SUCCESS);
+//   @include color-class('theme-success-invert', $LIGHT_THEME_SUCCESS_INVERT, $LIGHT_THEME_SUCCESS_INVERT, $LIGHT_THEME_SUCCESS_INVERT);
+//   @include color-class('theme-warning', $LIGHT_THEME_WARNING, $LIGHT_THEME_WARNING, $LIGHT_THEME_WARNING);
+//   @include color-class('theme-warning-invert', $LIGHT_THEME_WARNING_INVERT, $LIGHT_THEME_WARNING_INVERT, $LIGHT_THEME_WARNING_INVERT);
+//   @include color-class('theme-danger', $LIGHT_THEME_DANGER, $LIGHT_THEME_DANGER, $LIGHT_THEME_DANGER);
+//   @include color-class('theme-danger-invert', $LIGHT_THEME_DANGER_INVERT, $LIGHT_THEME_DANGER_INVERT, $LIGHT_THEME_DANGER_INVERT);
+// }
 
-@include dark-theme() {
-  @include color-class('theme-main', $DARK_THEME_FG, $DARK_THEME_BG, $DARK_THEME_BORDER);
-  @include color-class('theme-header', $DARK_THEME_HEADER_FG, $DARK_THEME_HEADER_BG, $DARK_THEME_HEADER_BG);
-  @include color-class('theme-footer', $DARK_THEME_FOOTER_FG, $DARK_THEME_FOOTER_BG, $DARK_THEME_FOOTER_BG);
-  @include color-class('theme-nav', $DARK_THEME_NAV_FG, $DARK_THEME_NAV_BG, $DARK_THEME_NAV_BORDER);
-  @include color-class('theme-accent', $DARK_THEME_ACCENT, $DARK_THEME_ACCENT, $DARK_THEME_ACCENT);
-  @include color-class('theme-accent-invert', $DARK_THEME_ACCENT_INVERT, $DARK_THEME_ACCENT_INVERT, $DARK_THEME_ACCENT_INVERT);
-  @include color-class('theme-link', $DARK_THEME_LINK, $DARK_THEME_LINK, $DARK_THEME_LINK);
-  @include color-class('theme-secondary', $DARK_THEME_SECONDARY, $DARK_THEME_SECONDARY, $DARK_THEME_SECONDARY);
-  @include color-class('theme-success', $DARK_THEME_SUCCESS, $DARK_THEME_SUCCESS, $DARK_THEME_SUCCESS);
-  @include color-class('theme-success-invert', $DARK_THEME_SUCCESS_INVERT, $DARK_THEME_SUCCESS_INVERT, $DARK_THEME_SUCCESS_INVERT);
-  @include color-class('theme-warning', $DARK_THEME_WARNING, $DARK_THEME_WARNING, $DARK_THEME_WARNING);
-  @include color-class('theme-warning-invert', $DARK_THEME_WARNING_INVERT, $DARK_THEME_WARNING_INVERT, $DARK_THEME_WARNING_INVERT);
-  @include color-class('theme-danger', $DARK_THEME_DANGER, $DARK_THEME_DANGER, $DARK_THEME_DANGER);
-  @include color-class('theme-danger-invert', $DARK_THEME_DANGER_INVERT, $DARK_THEME_DANGER_INVERT, $DARK_THEME_DANGER_INVERT);
-}
+// @include dark-theme() {
+//   @include color-class('theme-main', $DARK_THEME_FG, $DARK_THEME_BG, $DARK_THEME_BORDER);
+//   @include color-class('theme-header', $DARK_THEME_HEADER_FG, $DARK_THEME_HEADER_BG, $DARK_THEME_HEADER_BG);
+//   @include color-class('theme-footer', $DARK_THEME_FOOTER_FG, $DARK_THEME_FOOTER_BG, $DARK_THEME_FOOTER_BG);
+//   @include color-class('theme-nav', $DARK_THEME_NAV_FG, $DARK_THEME_NAV_BG, $DARK_THEME_NAV_BORDER);
+//   @include color-class('theme-accent', $DARK_THEME_ACCENT, $DARK_THEME_ACCENT, $DARK_THEME_ACCENT);
+//   @include color-class('theme-accent-invert', $DARK_THEME_ACCENT_INVERT, $DARK_THEME_ACCENT_INVERT, $DARK_THEME_ACCENT_INVERT);
+//   @include color-class('theme-link', $DARK_THEME_LINK, $DARK_THEME_LINK, $DARK_THEME_LINK);
+//   @include color-class('theme-secondary', $DARK_THEME_SECONDARY, $DARK_THEME_SECONDARY, $DARK_THEME_SECONDARY);
+//   @include color-class('theme-success', $DARK_THEME_SUCCESS, $DARK_THEME_SUCCESS, $DARK_THEME_SUCCESS);
+//   @include color-class('theme-success-invert', $DARK_THEME_SUCCESS_INVERT, $DARK_THEME_SUCCESS_INVERT, $DARK_THEME_SUCCESS_INVERT);
+//   @include color-class('theme-warning', $DARK_THEME_WARNING, $DARK_THEME_WARNING, $DARK_THEME_WARNING);
+//   @include color-class('theme-warning-invert', $DARK_THEME_WARNING_INVERT, $DARK_THEME_WARNING_INVERT, $DARK_THEME_WARNING_INVERT);
+//   @include color-class('theme-danger', $DARK_THEME_DANGER, $DARK_THEME_DANGER, $DARK_THEME_DANGER);
+//   @include color-class('theme-danger-invert', $DARK_THEME_DANGER_INVERT, $DARK_THEME_DANGER_INVERT, $DARK_THEME_DANGER_INVERT);
+// }
