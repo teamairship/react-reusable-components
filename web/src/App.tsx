@@ -13,7 +13,7 @@ function App() {
 
   React.useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
-      injectDOMStyle(processedTheme.css);
+      // injectDOMStyle(processedTheme.css);
     }
   }, []);
 
@@ -21,7 +21,7 @@ function App() {
     <Router>
       <div className="App d-flex flex-column justify-content-between">
         <SiteHeader />
-        <div className="App-main theme-main theme-main-bg flex-grow-1 pt-4">
+        <div className="App-main theme theme-bg flex-grow-1 pt-4">
           <Container>
             <div className="App-content-body">
               {routes.map((route, index) => route.component ? (

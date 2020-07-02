@@ -13,8 +13,8 @@
 /** _________________________________________________________ **/
 
 body {
-  .theme-main-bg { background-color: #f7fafc; transition: all 100ms ease-in-out }
-  .theme-main { color: #1a202c; transition: all 100ms ease-in-out }
+  .theme-bg { background-color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme { color: #1a202c; transition: all 100ms ease-in-out }
   .theme-header-bg { background-color: #2d3748; transition: all 100ms ease-in-out }
   .theme-header { color: #f7fafc; transition: all 100ms ease-in-out }
   .theme-footer-bg { background-color: #edf2f7; transition: all 100ms ease-in-out }
@@ -27,8 +27,8 @@ body {
 }
 
 body.dark-theme {
-  .theme-main-bg { background-color: #1a202c; transition: all 100ms ease-in-out }
-  .theme-main { color: #f7fafc; transition: all 100ms ease-in-out }
+  .theme-bg { background-color: #1a202c; transition: all 100ms ease-in-out }
+  .theme { color: #f7fafc; transition: all 100ms ease-in-out }
   .theme-header-bg { background-color: rgb(37,47,64); transition: all 100ms ease-in-out }
   .theme-header { color: #f7fafc; transition: all 100ms ease-in-out }
   .theme-footer-bg { background-color: rgb(29,40,56); transition: all 100ms ease-in-out }

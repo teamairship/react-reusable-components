@@ -123,10 +123,8 @@ export const THEME_DARK_CSS_CLASS = 'dark-theme';
 export const theme = {
   [THEME_PRIMARY]: {
     colors: {
-      main: {
-        bg: colors.gray[100],
-        text: colors.gray[900],
-      },
+      bg: colors.gray[100],
+      text: colors.gray[900],
       header: {
         bg: colors.gray[800],
         text: colors.gray[100],
@@ -144,10 +142,8 @@ export const theme = {
   },
   [THEME_DARK]: {
     colors: {
-      main: {
-        bg: colors.gray[900],
-        text: colors.gray[100],
-      },
+      bg: colors.gray[900],
+      text: colors.gray[100],
       header: {
         bg: darken(colors.gray[800], 0.2),
         text: colors.gray[100],
