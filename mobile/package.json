@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "adb reverse tcp:8081 tcp:8081 && react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "reset": "watchman watch-del-all && react-native start --reset-cache",
+    "clean": "rm -rf ./node_modules && rm -rf ./ios/build && rm -rf ~/Library/Developer/Xcode/DerivedData && yarn && cd android && ./gradlew clean && cd ..",
+    "nuke": "rm -rf ~/Library/Developer/Xcode/DerivedData && rm -rf ./ios/DerivedData && watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf ./node_modules/ && rm -rf ./ios/Pods/ && rm -rf ./ios/build/ && yarn cache clean && yarn install && yarn start --reset-cache"
   },
   "dependencies": {
     "react": "16.11.0",
