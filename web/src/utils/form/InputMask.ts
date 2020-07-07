@@ -57,7 +57,7 @@ const DEFAULT_DATE_PATTERN_PARTS = ["yyyy", "mm", "dd"];
 const DEFAULT_PREFIX = "";
 const DEFAULT_PLACEHOLDER = "";
 
-const padWithZeros = (str, numFill = 0) => {
+const padWithZeros = (str: any, numFill = 0) => {
   return (str || "")
     .toString()
     .padStart(numFill, "0");
@@ -220,7 +220,7 @@ class InputMask {
     return DEFAULT_MASK_DELIMITER;
   }
 
-  _sanitizeInput(val): string {
+  _sanitizeInput(val: any): string {
     const formatVal = (regexCharsToStrip: RegExp) => {
       const _val = (!val && val !== 0) ? "" : val;
       return _val.toString()
@@ -246,7 +246,7 @@ class InputMask {
     return rounded.substring(2);
   }
 
-  _maskNumber(val) {
+  _maskNumber(val: any) {
     const _val: string = this._sanitizeInput(val);
     if (!_val.length) return "";
 
@@ -276,7 +276,7 @@ class InputMask {
     return prefix + composed + suffix;
   }
 
-  _maskDate(val) {
+  _maskDate(val: any) {
     const _val: string = this._sanitizeInput(val);
     const datePatternParts = this._datePatternParts;
     const maxCursor = _val.length;
@@ -286,7 +286,7 @@ class InputMask {
     let currentMonth: number = 0;
     let currentYear: number = 0;
 
-    const setTimeFromInput = (currentTimeUnit: "d" | "m" | "y", partial) => {
+    const setTimeFromInput = (currentTimeUnit: "d" | "m" | "y", partial: string) => {
       const intPartial = parseInt(partial, 10);
       switch (currentTimeUnit) {
         case "d":
@@ -380,7 +380,7 @@ class InputMask {
     return composed;
   }
 
-  mask(val) {
+  mask(val: any) {
     if (this._isTypeNumber()) return this._maskNumber(val);
     if (this._isTypeDate()) return this._maskDate(val);
 
@@ -388,7 +388,7 @@ class InputMask {
     const maxCursor = _val.length;
     let composed = "";
     let cursor = 0;
-    const pushChar = (char) => {
+    const pushChar = (char: string) => {
       composed += char;
       cursor++;
     };
@@ -441,11 +441,11 @@ class InputMask {
     return prefix + composed;
   }
 
-  unmask(val) {
+  unmask(val: any) {
     return this._sanitizeInput(val);
   }
 
-  resolve(val) {
+  resolve(val: any) {
     this.value = this.mask(val);
     this.unmaskedValue = this.unmask(val);
     return this;
