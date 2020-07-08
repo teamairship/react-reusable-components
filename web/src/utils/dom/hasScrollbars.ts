@@ -19,6 +19,7 @@ export default function hasScrollbars(node = getDOMBody()) {
     DEBUG_LOG('content not overflowing');
     return false;
   }
+  // @ts-ignore
   const style = node.style || window.getComputedStyle(node, "");
   if (!style) {
     DEBUG_LOG('node style not found');

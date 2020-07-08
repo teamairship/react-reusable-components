@@ -10,6 +10,7 @@ interface Props {
   children?: validChild | validChild[],
   className?: string | object | undefined,
   type?: ButtonType | undefined,
+  submit?: boolean,
 }
 
 const Button = React.forwardRef(function Button({
@@ -17,6 +18,7 @@ const Button = React.forwardRef(function Button({
   children,
   onClick,
   type = 'secondary',
+  submit,
 }: Props, ref?: React.Ref<any>) {
   const classNameType = type ? `btn-${type}` : '';
   return (
@@ -26,6 +28,7 @@ const Button = React.forwardRef(function Button({
       title='Open Nav Menu'
       onClick={onClick}
       ref={ref}
+      {...(submit ? { type: 'submit' } : {})}
     >
       {children}
     </button>
