@@ -385,6 +385,8 @@ class InputMask {
     if (this._isTypeDate()) return this._maskDate(val);
 
     const _val: string = this._sanitizeInput(val);
+    if (!_val) return "";
+
     const maxCursor = _val.length;
     let composed = "";
     let cursor = 0;

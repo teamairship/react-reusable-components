@@ -33,7 +33,7 @@ test('input masks work correctly for phone numbers', () => {
   expect(i6.mask('77755560')).toEqual('(777) 555-60__');
   expect(i6.mask('777555601')).toEqual('(777) 555-601_');
   expect(i6.mask('7775556010')).toEqual('(777) 555-6010');
-  expect(i6.mask('')).toEqual('(___) ___-____');
+  expect(i6.mask('')).toEqual('');
 
   // handle escaped characters
   const i7 = new InputMask({ mask: '1 (8\\0\\0) 000-0000' });
