@@ -1,9 +1,11 @@
 
 import React, { useRef } from 'react';
 import { useField } from 'formik';
-import InputMask from '../../utils/form/InputMask';
+
 import useUuid from '../../hooks/useUuid';
+import InputMask from '../../utils/form/InputMask';
 import setCursorPosition from '../../utils/dom/setCursorPosition';
+import InputBase from './InputBase';
 
 const regexLastNumber = /(\d)(?!.*\d)/i;
 const inputMaskPhone = new InputMask({ mask: '[1 ](000) 000-0000' });
@@ -19,6 +21,7 @@ const InputPhone: React.FC<InputProps> = ({ id, label, placeholder, ...props }) 
   const inputRef = useRef(null);
   const uuid = useUuid(id);
 
+  // TODO: generalize this onchange handler for any type of input masking
   const onChange = (ev: any) => {
     let isDeleting = false;
     let value = ev.target.value;
@@ -63,27 +66,18 @@ const InputPhone: React.FC<InputProps> = ({ id, label, placeholder, ...props }) 
   };
 
   return (
-    <p style={{ marginTop: 0, marginBottom: 20 }}>
-      <label htmlFor={uuid} style={{ display: 'block', marginBottom: 10 }}>
-        <p>
-          <strong>
-            {label}
-          </strong>
-        </p>
-        <input
-          {...field}
-          id={uuid}
-          ref={inputRef}
-          onChange={onChange}
-          // onKeyUp={onKeyUp}
-          placeholder={placeholder || (inputMaskPhone.placeholder)}
-          style={{ marginBottom: 10 }}
-        />
-      </label>
-      {meta.touched && meta.error ? (
-        <div className='error'>{meta.error}</div>
-      ) : null}
-    </p>
+    <InputBase
+      {...field}
+      id={uuid}
+      ref={inputRef}
+      onChange={onChange}
+      placeholder={placeholder || (inputMaskPhone.placeholder)}
+      errorComponent={(
+        meta.touched && meta.error ? (
+          <div className='error'>{meta.error}</div>
+        ) : null
+      )}
+    />
   );
 };
 
