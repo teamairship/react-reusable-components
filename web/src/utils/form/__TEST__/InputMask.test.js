@@ -123,6 +123,11 @@ test('input mask works for number type', () => {
   const i4 = new InputMask({ mask: Number, prefix: '$', decimalPrecision: 2 });
   expect(i4.mask('')).toEqual('');
   expect(i4.mask('.')).toEqual('$0.');
+  expect(i4.mask('$')).toEqual('');
+  expect(i4.mask('$$')).toEqual('');
+  expect(i4.mask('$$123')).toEqual('$123');
+  expect(i4.mask('$$$1234')).toEqual('$1,234');
+  expect(i4.mask('$$$$12345')).toEqual('$12,345');
   expect(i4.mask('0')).toEqual('$0');
   expect(i4.mask('0.')).toEqual('$0.');
   expect(i4.mask('0.0')).toEqual('$0.0');
