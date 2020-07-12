@@ -1,4 +1,7 @@
 
+import React, { useRef, useEffect } from 'react';
+import setCursorPosition from '../../utils/dom/setCursorPosition';
+
 /**
  * INPUT MASK
  *
@@ -38,6 +41,7 @@
  */
 
 const regexNonAlphaNumeric = /[|()[\]/\\\-+_.,\s]/gi;
+const regexLastAlphaNumeric = new RegExp(`([0-9a-zA-Z])(?!.*[0-9a-zA-Z])`, 'i');
 const regexNotNumeric = /[|()[\]/\\\-+_\sa-zA-Z]/gi;
 const regexDateDelimiter = /[|()[\]/\\\-+_.\sa-zA-Z]/gi;
 const regexNumeric = /[0-9]/i;
@@ -82,7 +86,7 @@ interface PatternPart {
   escape: boolean;
 }
 
-class InputMask {
+export default class InputMask {
   _mask: Mask = DEFAULT_MASK;
   _maskParts: any[] = [];
   _maxLength: number = Infinity;
@@ -454,4 +458,111 @@ class InputMask {
   }
 }
 
-export default InputMask;
+interface InputMaskChangeHandlerConstructorOptions {
+  inputRef: React.Ref<any>,
+  inputMask: InputMask,
+  setValue: (value: any) => void,
+  setTouched?: (isTouched: boolean) => void,
+}
+class InputMaskChangeHandler {
+  _inputRef: any = null;
+  _inputMask: InputMask = null;
+  _setValue: (value: any) => void = () => {};
+  _setTouched: (isTouched: boolean) => void = () => {};
+  _lastValueRaw: string = '';
+  _lastValueMasked: string = '';
+  _lastValueUnmasked: string = '';
+  _lastCursorPosition: number = 0;
+  _lastTypedChar: string = '';
+
+  constructor(options: InputMaskChangeHandlerConstructorOptions) {
+    this._inputRef = options.inputRef;
+    this._inputMask = options.inputMask;
+    this._setValue = options.setValue;
+    this._setTouched = options.setTouched;
+  }
+
+  onChange = (ev: any) => {
+    if (!this._inputMask) return;
+    if (!this._inputRef || !this._inputRef.current) return;
+    const {
+      selectionStart: currentCursorPosition = 0,
+      value: currentEventValue = '',
+    } = ev.target;
+    let newValue = currentEventValue;
+    let isDeleting = false;
+    this._lastTypedChar = currentEventValue[currentCursorPosition - 1];
+    if (this._checkIsDeleting(currentEventValue)) {
+      isDeleting = true;
+      const pre = this._lastValueMasked.substring(0, currentCursorPosition);
+      const post = this._lastValueMasked.substring(currentCursorPosition + 1, this._lastValueMasked.length);
+      newValue = pre + post;
+    }
+    const maskedValue = this._inputMask.mask(newValue);
+    const unmaskedValue = this._inputMask.unmask(newValue);
+    this._setTouched(true);
+    this._setValue(maskedValue);
+
+    if (isDeleting) {
+      this._setCursorBackward(maskedValue, currentCursorPosition);
+    } else {
+      this._setCursorForward(maskedValue, currentCursorPosition);
+    }
+
+    this._lastValueMasked = maskedValue;
+    this._lastValueUnmasked = unmaskedValue;
+    this._lastValueRaw = newValue;
+    this._lastCursorPosition = currentCursorPosition;
+  }
+
+  _checkIsDeleting = (currentEventValue: string): boolean => {
+    if (!currentEventValue && !this._lastValueMasked) return false;
+    if (!currentEventValue && this._lastValueMasked) return true;
+    return currentEventValue.length < this._lastValueMasked.length;
+  }
+
+  _setCursorForward = (currentMaskedValue: string, currentCursorPosition: number): void => {
+    setTimeout(() => {
+      setCursorPosition(
+        this._inputRef.current,
+        this._getCursorForwardPosition(currentMaskedValue, currentCursorPosition)
+      );
+    }, 0);
+  }
+
+  _setCursorBackward = (currentMaskedValue: string, currentCursorPosition: number): void => {
+    setTimeout(() => {
+      setCursorPosition(
+        this._inputRef.current,
+        this._getCursorBackwardPosition(currentMaskedValue, currentCursorPosition)
+      );
+    }, 0);
+  }
+
+  _getCursorForwardPosition = (currentMaskedValue: string, currentCursorPosition: number): number => {
+    const regexLastTypedChar = new RegExp(this._lastTypedChar);
+    const valueAfterCursor = currentMaskedValue.substring(currentCursorPosition - 1);
+    const indexLastTypedChar = valueAfterCursor.search(regexLastTypedChar);
+    const newPos = currentCursorPosition + (indexLastTypedChar > -1 ? indexLastTypedChar : currentMaskedValue.length);
+    return newPos;
+  }
+
+  _getCursorBackwardPosition = (currentMaskedValue: string, currentCursorPosition: number): number => {
+    const valueBeforeCursor = currentMaskedValue.substring(0, currentCursorPosition);
+    const indexLastNumber = valueBeforeCursor.search(regexLastAlphaNumeric);
+    return (indexLastNumber > -1 ? indexLastNumber : currentMaskedValue.length) + 1
+  }
+}
+
+export const useInputMaskChangeHandler = (options: InputMaskChangeHandlerConstructorOptions) => {
+  const inputMaskChangeHandler = useRef(null);
+  const onChange = useRef(() => {});
+  useEffect(() => {
+    inputMaskChangeHandler.current = new InputMaskChangeHandler(options);
+    onChange.current = inputMaskChangeHandler.current.onChange;
+    return () => {
+      delete inputMaskChangeHandler.current;
+    };
+  }, []);
+  return onChange.current;
+};
