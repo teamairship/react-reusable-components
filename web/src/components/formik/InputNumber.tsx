@@ -6,7 +6,7 @@ import useUuid from '../../hooks/useUuid';
 import InputMask, { useInputMaskChangeHandler } from '../../utils/form/InputMask';
 import InputBase from './InputBase';
 
-const inputMaskPhone = new InputMask({ mask: '[1 ](000) 000-0000' });
+const inputMaskNumber = new InputMask({ mask: Number });
 
 interface InputProps {
   id?: string,
@@ -14,13 +14,13 @@ interface InputProps {
   name: string,
   placeholder?: string,
 }
-const InputPhone: React.FC<InputProps> = ({ id, label, placeholder, ...props }) => {
+const InputNumber: React.FC<InputProps> = ({ id, label, placeholder, ...props }) => {
   const [field, meta, helpers] = useField(props);
   const inputRef = useRef(null);
   const uuid = useUuid(id);
   const onChange = useInputMaskChangeHandler({
     inputRef,
-    inputMask: inputMaskPhone,
+    inputMask: inputMaskNumber,
     setValue: helpers.setValue,
     setTouched: helpers.setTouched,
   });
@@ -32,7 +32,7 @@ const InputPhone: React.FC<InputProps> = ({ id, label, placeholder, ...props }) 
       ref={inputRef}
       label={label}
       onChange={onChange}
-      placeholder={placeholder || (inputMaskPhone.placeholder)}
+      placeholder={placeholder || (inputMaskNumber.placeholder)}
       errorComponent={(
         meta.touched && meta.error ? (
           <div className='error'>{meta.error}</div>
@@ -42,4 +42,4 @@ const InputPhone: React.FC<InputProps> = ({ id, label, placeholder, ...props }) 
   );
 };
 
-export default InputPhone;
+export default InputNumber;

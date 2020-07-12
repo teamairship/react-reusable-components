@@ -7,6 +7,10 @@ import ExampleCode from '../_AppInternal/_components/ExampleCode';
 import Button from '../components/bootstrap/Button';
 import Form from '../components/formik/Form';
 import InputPhone from '../components/formik/InputPhone';
+import InputCreditCard from '../components/formik/InputCreditCard';
+import InputDate from '../components/formik/InputDate';
+import InputNumber from '../components/formik/InputNumber';
+import InputPrice from '../components/formik/InputPrice';
 
 const FormsPage = () => {
   const onSubmit = (values: any) => {
@@ -23,6 +27,10 @@ const FormsPage = () => {
         <ExampleCode>
           <Form onSubmit={onSubmit} initialValues={initialValues}>
             <InputPhone name="phone" label="Phone:" />
+            <InputCreditCard name="creditCard" label="Credit Card:" />
+            <InputDate name="dateOfBirth" label="DOB:" />
+            <InputNumber name="aLargeNumber" label="A large number:" />
+            <InputPrice name="price" label="Price:" />
             <Button
               type="dark"
               submit

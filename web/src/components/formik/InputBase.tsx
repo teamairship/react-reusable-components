@@ -47,7 +47,7 @@ const InputBase = React.forwardRef(({
   styleContainer = {},
 }: InputBaseProps, ref?: React.Ref<any>) => {
   const uuid = useUuid(id);
-  const valueProp = onChange ? { value } : { defaultValue: value };
+  const valueProp = onChange ? { value: value || '' } : { defaultValue: value };
   const inlineStyle = inline ? { display: 'inline-block' } : { display: 'block' };
 
   const styling = {
