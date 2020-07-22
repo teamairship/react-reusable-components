@@ -2,6 +2,7 @@
 import HomePage from './pages/HomePage';
 import ModalsPage from './pages/ModalsPage';
 import InteractablesPage from './pages/InteractablesPage';
+import FormsPage from './pages/FormsPage';
 
 export default [
   {
@@ -18,5 +19,10 @@ export default [
     path: '/interactables',
     name: 'Interactables',
     component: InteractablesPage,
+  },
+  {
+    path: '/forms',
+    name: 'Forms',
+    component: FormsPage,
   },
 ];
