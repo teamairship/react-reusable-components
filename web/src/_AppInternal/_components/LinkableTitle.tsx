@@ -81,7 +81,7 @@ const LinkableTitle: React.FC<LinkableTitleProps> = ({
   else if (h6) Heading = H6;
 
   return (
-    <Heading style={{ marginBottom: 30 }} className={cx(className)}>
+    <Heading id={slug} style={{ marginBottom: 30 }} className={cx(className)}>
       {slug ? (
         <a onClick={handleClick} href={slug} className="text-reset position-relative">
           <small style={{ position: 'absolute', right: '100%', marginRight: 5 }}>

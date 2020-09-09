@@ -1,0 +1,60 @@
+/**
+ * ANTD CSS OVERRIDES!! Because... AntD.
+ */
+
+// these vars can be moved to a global scss vars file:
+$BREAKPOINT_MOBILE: 576px;
+$BREAKPOINT_TABLET: 768px;
+$BREAKPOINT_LAPTOP: 992px;
+$BREAKPOINT_DESKTOP: 1200px;
+
+// local vars:
+$TRAY_WIDTH_MOBILE: 400px;
+$TRAY_WIDTH_TABLET: 450px;
+$TRAY_WIDTH_LAPTOP: 450px;
+$TRAY_WIDTH_DESKTOP: 450px;
+
+.tray.ant-drawer {
+  .ant-drawer-content-wrapper {
+    /* force ant-d drawer to be mobile responsive */
+    max-width: 100%;
+    width: 95% !important;
+    width: calc(100% - 40px) !important;
+
+    @media screen and (min-width: $BREAKPOINT_MOBILE) {
+      width: $TRAY_WIDTH_MOBILE !important;
+    }
+
+    @media screen and (min-width: $BREAKPOINT_TABLET) {
+      width: $TRAY_WIDTH_TABLET !important;
+    }
+
+    @media screen and (min-width: $BREAKPOINT_LAPTOP) {
+      width: $TRAY_WIDTH_LAPTOP !important;
+    }
+
+    @media screen and (min-width: $BREAKPOINT_DESKTOP) {
+      width: $TRAY_WIDTH_DESKTOP !important;
+    }
+  }
+
+  .ant-drawer-title {
+    // customize these to taste
+    min-height: 22px;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 31px;
+    font-size: 2.2142857142857144em;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.75;
+    letter-spacing: 0.2px;
+
+    @media (max-width: 576px) {
+      line-height: 1;
+    }
+  }
+}
