@@ -67,6 +67,7 @@ const LinkableTitle: React.FC<LinkableTitleProps> = ({
 }) => {
   const content: string = title || children?.toString() || '';
   const slug = sluggify(content);
+  const isActive = window.location.hash === `#${slug}`;
   const handleClick = (ev: any) => {
     ev.preventDefault();
     window.location.hash = slug;
@@ -81,7 +82,7 @@ const LinkableTitle: React.FC<LinkableTitleProps> = ({
   else if (h6) Heading = H6;
 
   return (
-    <Heading id={slug} style={{ marginBottom: 30 }} className={cx(className)}>
+    <Heading id={slug} style={{ marginBottom: 30 }} className={cx(className, isActive ? 'theme-accent' : null)}>
       {slug ? (
         <a onClick={handleClick} href={slug} className="text-reset position-relative">
           <small style={{ position: 'absolute', right: '100%', marginRight: 5 }}>

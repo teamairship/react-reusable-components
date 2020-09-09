@@ -3,24 +3,13 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 import './App.scss';
 import SiteHeader from './_AppInternal/_components/SiteHeader';
-import routes from './routes';
 import Container from './_AppInternal/_components/Container';
-
-function scrollToAnchorElementIfSet() {
-  setTimeout(() => {
-    const hash = window.location.hash;
-    console.log({ hash });
-    if (!hash) return;
-    const element = document.querySelector(hash);
-    console.log({ element });
-    if (!element) return;
-    element.scrollIntoView(true);
-  }, 100);
-}
+import routes from './routes';
+import scrollToAnchorElementIfExists from './utils/scroll/scrolltoAnchorElementIfExists';
 
 function App() {
   useEffect(() => {
-    scrollToAnchorElementIfSet();
+    scrollToAnchorElementIfExists();
   }, []);
   return (
     <Router>
