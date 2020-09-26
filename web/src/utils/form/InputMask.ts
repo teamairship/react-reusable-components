@@ -462,6 +462,7 @@ interface InputMaskChangeHandlerConstructorOptions {
   inputMask: InputMask;
   setValue: (value: any) => void;
   setTouched?: (isTouched: boolean) => void;
+  onChangeFallback?: React.ChangeEventHandler;
 }
 class InputMaskChangeHandler {
   _inputRef: any = null;
@@ -570,8 +571,9 @@ export const useInputMaskChangeHandler = (
   options: InputMaskChangeHandlerConstructorOptions,
 ): React.ChangeEventHandler => {
   const { inputRef, inputMask, setValue, setTouched } = options;
+  const onChangeFallback = options?.onChangeFallback || (() => {});
   const inputMaskChangeHandler = useRef(null);
-  const onChange = useRef(() => {});
+  const onChange = useRef(onChangeFallback);
   useEffect(() => {
     inputMaskChangeHandler.current = new InputMaskChangeHandler({
       inputRef,
@@ -584,5 +586,5 @@ export const useInputMaskChangeHandler = (
       onChange.current = () => {};
     };
   }, [inputRef, inputMask, setValue, setTouched]);
-  return onChange.current || (() => {});
+  return onChange.current || onChangeFallback;
 };

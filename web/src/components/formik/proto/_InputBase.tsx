@@ -1,7 +1,7 @@
 
 import React from 'react'
-import useUuid from '../../hooks/useUuid';
-import cx, { ClassName } from '../../utils/css/composeClassNames';
+import useUuid from '../../../hooks/useUuid';
+import cx, { ClassName } from '../../../utils/css/composeClassNames';
 
 interface InputBaseProps {
   id?: string,
@@ -25,7 +25,7 @@ interface InputBaseProps {
   styleLabelContainer?: React.StyleHTMLAttributes<any>,
   styleContainer?: React.StyleHTMLAttributes<any>,
 }
-const InputBase = React.forwardRef(({
+export const InputBase = React.forwardRef(({
   id,
   label,
   placeholder,
@@ -110,5 +110,3 @@ const InputBase = React.forwardRef(({
     </p>
   );
 });
-
-export default InputBase;
