@@ -18,17 +18,17 @@ function App() {
         <div className="App-main theme-main theme-main-bg flex-grow-1 pt-4">
           <Container>
             <div className="App-content-body">
-              {routes.map((route, index) => route.component ? (
-                <Route key={index} path={route.path} exact component={route.component} />
-              ) : null)}
+              {routes.map((route, index) =>
+                route.component ? (
+                  <Route key={index} path={route.path} exact component={route.component} />
+                ) : null,
+              )}
             </div>
           </Container>
         </div>
         <footer className="App-footer theme-footer theme-footer-bg pt-3">
           <Container>
-            <p>
-              (c) Airship LLC
-            </p>
+            <p>(c) Airship LLC</p>
           </Container>
         </footer>
       </div>

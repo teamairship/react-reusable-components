@@ -1,4 +1,3 @@
-
 import InputMask from '../InputMask';
 
 test('input masks work correctly for phone numbers', () => {
@@ -42,7 +41,7 @@ test('input masks work correctly for phone numbers', () => {
   expect(i8.mask('123412341234')).toEqual('0123 1234 1234 1234');
 
   // handle prefix
-  const i9 = new InputMask({ mask: '0000 0000 0000 0000', prefix: "visa " });
+  const i9 = new InputMask({ mask: '0000 0000 0000 0000', prefix: 'visa ' });
   expect(i9.mask('1111222233334444')).toEqual('visa 1111 2222 3333 4444');
   expect(i9.mask('1111')).toEqual('visa 1111');
   expect(i9.mask('')).toEqual('');
@@ -69,7 +68,7 @@ test('input mask constructed with correct default delimeter', () => {
   expect(i2._delimiter).toEqual('/');
   const i3 = new InputMask({ mask: Number, delimiter: '|' });
   expect(i3._delimiter).toEqual('|');
-  const i4 = new InputMask({ mask: "0000 0000" });
+  const i4 = new InputMask({ mask: '0000 0000' });
   expect(i4._delimiter).toEqual('-');
 });
 
@@ -149,7 +148,13 @@ test('input mask works for number type', () => {
   expect(i5.mask(3.14159265359)).toEqual('3.1416');
 
   // handle different number format AND decimal precision
-  const i6 = new InputMask({ mask: Number, prefix: '£', delimiter: '.', decimalChar: ',', decimalPrecision: 2 });
+  const i6 = new InputMask({
+    mask: Number,
+    prefix: '£',
+    delimiter: '.',
+    decimalChar: ',',
+    decimalPrecision: 2,
+  });
   expect(i6.mask('')).toEqual('');
   expect(i6.mask('.')).toEqual('');
   expect(i6.mask(',')).toEqual('£0,');
