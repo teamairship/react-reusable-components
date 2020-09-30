@@ -1,0 +1,29 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    // normally the /web dir would be omitted in an eslint config
+    "project": "./web/tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint/eslint-plugin", "jest"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier",
+    "eslint-config-prettier/@typescript-eslint",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
+  "rules": {
+    "strict": ["error", "never"]
+  },
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  }
+}
