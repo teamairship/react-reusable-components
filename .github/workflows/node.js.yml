@@ -20,9 +20,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    # NOTE - REMOVE `cd web` since in your project process.cwd will be the project root
-    - run: cd web
-    - run: npm install
-    - run: npm run validate --if-present
+    # TODO - REMOVE `cd web` from all following steps when using in your app
+    - run: cd web && npm install
+    - run: cd web && npm run validate --if-present
       env:
         CI: true

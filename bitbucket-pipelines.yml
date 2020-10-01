@@ -6,7 +6,6 @@ pipelines:
         caches:
           - node
         script:
-          # NOTE - REMOVE `cd web` since in your project process.cwd will be the project root
-          - cd web
-          - npm install
-          - npm run validate --if-present
+          # TODO - REMOVE `cd web` from all following steps when using in your app
+          - cd web && npm install
+          - cd web && npm run validate --if-present
