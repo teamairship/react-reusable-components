@@ -1,59 +1,46 @@
-
 import React from 'react';
 import cx from '../../utils/css/composeClassNames';
 
-const sluggify = (text: any) => {
+const sluggify = (text: any): string => {
   if (!text || typeof text !== 'string') return '';
   return text.toLowerCase().replace(/\s/gi, '-');
 };
 
 const H1: React.FC<any> = ({ children, ...props }) => {
-  return (
-    <h1 {...props}>{children}</h1>
-  );
+  return <h1 {...props}>{children}</h1>;
 };
 
 const H2: React.FC<any> = ({ children, ...props }) => {
-  return (
-    <h2 {...props}>{children}</h2>
-  );
+  return <h2 {...props}>{children}</h2>;
 };
 
 const H3: React.FC<any> = ({ children, ...props }) => {
-  return (
-    <h3 {...props}>{children}</h3>
-  );
+  return <h3 {...props}>{children}</h3>;
 };
 
 const H4: React.FC<any> = ({ children, ...props }) => {
-  return (
-    <h4 {...props}>{children}</h4>
-  );
+  return <h4 {...props}>{children}</h4>;
 };
 
 const H5: React.FC<any> = ({ children, ...props }) => {
-  return (
-    <h5 {...props}>{children}</h5>
-  );
+  return <h5 {...props}>{children}</h5>;
 };
 
 const H6: React.FC<any> = ({ children, ...props }) => {
-  return (
-    <h6 {...props}>{children}</h6>
-  );
+  return <h6 {...props}>{children}</h6>;
 };
 
 interface LinkableTitleProps {
-  className?: string | object,
-  children?: React.ReactChild,
-  title?: string,
-  h1?: boolean,
-  h2?: boolean,
-  h3?: boolean,
-  h4?: boolean,
-  h5?: boolean,
-  h6?: boolean,
-};
+  className?: string | object;
+  children?: React.ReactChild;
+  title?: string;
+  h1?: boolean;
+  h2?: boolean;
+  h3?: boolean;
+  h4?: boolean;
+  h5?: boolean;
+  h6?: boolean;
+}
 const LinkableTitle: React.FC<LinkableTitleProps> = ({
   className,
   title,
@@ -68,7 +55,7 @@ const LinkableTitle: React.FC<LinkableTitleProps> = ({
   const content: string = title || children?.toString() || '';
   const slug = sluggify(content);
   const isActive = window.location.hash === `#${slug}`;
-  const handleClick = (ev: any) => {
+  const handleClick = (ev: any): void => {
     ev.preventDefault();
     window.location.hash = slug;
   };
@@ -82,7 +69,11 @@ const LinkableTitle: React.FC<LinkableTitleProps> = ({
   else if (h6) Heading = H6;
 
   return (
-    <Heading id={slug} style={{ marginBottom: 30 }} className={cx(className, isActive ? 'theme-accent' : null)}>
+    <Heading
+      id={slug}
+      style={{ marginBottom: 30 }}
+      className={cx(className, isActive ? 'theme-accent' : null)}
+    >
       {slug ? (
         <a onClick={handleClick} href={slug} className="text-reset position-relative">
           <small style={{ position: 'absolute', right: '100%', marginRight: 5 }}>
@@ -95,6 +86,6 @@ const LinkableTitle: React.FC<LinkableTitleProps> = ({
       )}
     </Heading>
   );
-}
+};
 
 export default LinkableTitle;

@@ -7,9 +7,9 @@ export default function setCursorPosition(input: any, pos: number) {
     input.focus();
     input.setSelectionRange(pos, pos);
 
-  // IE8 and below
+    // IE8 and below
   } else if (input.createTextRange) {
-    var range = input.createTextRange();
+    const range = input.createTextRange();
     range.collapse(true);
     range.moveEnd('character', pos);
     range.moveStart('character', pos);

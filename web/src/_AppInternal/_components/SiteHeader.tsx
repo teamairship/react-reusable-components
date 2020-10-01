@@ -1,4 +1,3 @@
-
 import React from 'react';
 import reactLogo from '../_assets/react-logo.svg';
 import { useHistory, Link } from 'react-router-dom';
@@ -13,13 +12,14 @@ import NavMenu from '../../components/custom/NavMenu';
 import Toggle from '../../components/custom/Toggle';
 import getDOMBody from '../../utils/dom/getDOMBody';
 
-const SiteHeaderLeft = () => {
+const SiteHeaderLeft: React.FC = () => {
   return (
     <div className="d-flex flex-row align-items-center justify-content-center justify-content-md-between">
       <img src={reactLogo} className="App-logo" alt="airship logo" />
       <h1 className="App-name">
         <Link to="/" className="text-reset">
-          REACT REUSABLE <br className="d-md-none"/>COMPONENTS
+          REACT REUSABLE <br className="d-md-none" />
+          COMPONENTS
         </Link>
       </h1>
     </div>
@@ -27,9 +27,9 @@ const SiteHeaderLeft = () => {
 };
 
 interface SiteHeaderRightProps {
-  toggleNav: () => void,
-  isShowingNav?: boolean,
-  refNavToggle?: React.Ref<any>,
+  toggleNav: () => void;
+  isShowingNav?: boolean;
+  refNavToggle?: React.Ref<any>;
 }
 const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({
   toggleNav,
@@ -49,11 +49,7 @@ const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({
   };
   return (
     <div className="text-center my-4 my-md-0 d-md-flex align-items-center">
-      <Toggle
-        className="mr-4"
-        onClick={handleToggleTheme}
-        checked={isDarkTheme}
-      />
+      <Toggle className="mr-4" onClick={handleToggleTheme} checked={isDarkTheme} />
       <Button
         type="light"
         onClick={() => {
@@ -61,16 +57,20 @@ const SiteHeaderRight: React.FC<SiteHeaderRightProps> = ({
         }}
         ref={refNavToggle}
       >
-        <i className={cx("fas fa-bars", { "fa-rotate-90": isShowingNav })} />
+        <i className={cx('fas fa-bars', { 'fa-rotate-90': isShowingNav })} />
       </Button>
     </div>
   );
 };
 
-const SiteHeader = () => {
+const SiteHeader: React.FC = () => {
   const [isShowingNav, setIsShowingNav] = React.useState<boolean>(false);
-  const hideNav = () => { setIsShowingNav(false); }
-  const toggleNav = () => { setIsShowingNav(!isShowingNav); }
+  const hideNav = () => {
+    setIsShowingNav(false);
+  };
+  const toggleNav = () => {
+    setIsShowingNav(!isShowingNav);
+  };
   const history = useHistory();
   const refNavToggle = React.useRef(null);
   return (
@@ -78,19 +78,15 @@ const SiteHeader = () => {
       <header className="App-header">
         <Container className="d-block d-md-flex align-items-center justify-content-between">
           <SiteHeaderLeft />
-          <SiteHeaderRight toggleNav={toggleNav} isShowingNav={isShowingNav} refNavToggle={refNavToggle} />
+          <SiteHeaderRight
+            toggleNav={toggleNav}
+            isShowingNav={isShowingNav}
+            refNavToggle={refNavToggle}
+          />
         </Container>
       </header>
-      <NavDrawer
-        isShowing={isShowingNav}
-        hideNav={hideNav}
-        animationType="slideOver"
-      >
-        <NavMenu
-          hideNav={hideNav}
-          history={history}
-          refNavToggle={refNavToggle}
-        />
+      <NavDrawer isShowing={isShowingNav} hideNav={hideNav} animationType="slideOver">
+        <NavMenu hideNav={hideNav} history={history} refNavToggle={refNavToggle} />
       </NavDrawer>
     </>
   );

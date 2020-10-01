@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.scss';
 import SiteHeader from './_AppInternal/_components/SiteHeader';
@@ -7,7 +7,7 @@ import Container from './_AppInternal/_components/Container';
 import routes from './routes';
 import scrollToAnchorElementIfExists from './utils/scroll/scrolltoAnchorElementIfExists';
 
-function App() {
+const App: React.FC = () => {
   useEffect(() => {
     scrollToAnchorElementIfExists();
   }, []);
@@ -34,6 +34,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

@@ -1,7 +1,7 @@
 // NOTE - THIS IS A TEMPORARY FILE UNTIL THE FOLLOWING PR IS MERGED TO `jsx-to-string` npm package:
 // https://github.com/grommet/jsx-to-string/pull/45
 
-import React, { isValidElement } from 'react';
+import { isValidElement } from 'react';
 import stringify from 'json-stringify-pretty-compact';
 import { isImmutable } from 'immutable';
 
@@ -53,7 +53,7 @@ function serializeItem(item, options, delimit = true) {
   } else if (typeof item === 'number' || typeof item === 'boolean') {
     result = `${item}`;
   } else if (Array.isArray(item)) {
-    var indentation = new Array(options.spacing + 1).join(' ');
+    const indentation = new Array(options.spacing + 1).join(' ');
     const delimiter = delimit ? ', ' : `\n${indentation}`;
     const items = item.map(i => serializeItem(i, options)).join(delimiter);
     result = delimit ? `[${items}]` : `${items}`;
