@@ -1,0 +1,12 @@
+image: node:10.15.3
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script:
+          # NOTE - REMOVE `cd web` since in your project process.cwd will be the project root
+          - cd web
+          - npm install
+          - npm run validate --if-present
