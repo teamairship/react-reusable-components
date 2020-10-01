@@ -30,6 +30,17 @@ Brought to you by [Airship LLC](https://teamairship.com/).
 - [Mobile-only components/hooks/utils](./mobile)
 - [Common components/hooks/utils](./common)
 
+## Prettier
+
+Prettier config is included in this project and automatically runs before each commit and also runs
+in the CI pipeline. It is **highly recommended** that you add the following settings (if you are a
+VS Code user):
+
+```
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"editor.formatOnSave": true
+```
+
 ## Deployment
 
 The web portion of this app is deployed to [Heroku](https://dashboard.heroku.com/apps/react-reusable-components). See the [live app here](https://react-reusable-components.herokuapp.com/).
