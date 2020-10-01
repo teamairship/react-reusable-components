@@ -6,8 +6,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    // normally the /web dir would be omitted in an eslint config
-    "project": "./web/tsconfig.json"
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint/eslint-plugin", "jest"],
   "extends": [
@@ -16,11 +15,20 @@
     "plugin:@typescript-eslint/recommended",
     "eslint-config-prettier",
     "eslint-config-prettier/@typescript-eslint",
+    "plugin:react/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style"
   ],
+  "ignorePatterns": ["craco.config.js"],
   "rules": {
-    "strict": ["error", "never"]
+    "strict": ["error", "never"],
+    "react/prop-types": [0],
+    "@typescript-eslint/no-empty-interface": [0],
+    "@typescript-eslint/no-explicit-any": [0],
+    "@typescript-eslint/explicit-function-return-type": [0],
+    "@typescript-eslint/no-use-before-define": ["error", { "classes": false, "functions": false }],
+    "@typescript-eslint/no-empty-function": [0],
+    "@typescript-eslint/ban-ts-ignore": [0]
   },
   "env": {
     "browser": true,
