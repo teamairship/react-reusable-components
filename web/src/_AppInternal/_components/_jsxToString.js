@@ -18,7 +18,7 @@ function stringifyObject(object, opts) {
     result = object.map(item => stringifyObject(item));
   } else if (object && typeof object === 'object') {
     result = {};
-    Object.keys(object).map(key => {
+    Object.keys(object).forEach(key => {
       let value = object[key];
       if (isValidElement(value)) {
         value = jsxToString(value, opts);

@@ -546,7 +546,8 @@ class InputMaskChangeHandler {
     const nextCursorMatchesLastTyped =
       this._lastTypedChar === this._currentValueMasked[this._currentCursorPosition];
     const shouldAddAdditionalCursorOffset = didAddMaskChars && nextCursorMatchesLastTyped;
-    const regexLastTypedChar = new RegExp(this._lastTypedChar);
+    const safeLastChar = (this._lastTypedChar || '').toString().replace(/[()[\]]/, '');
+    const regexLastTypedChar = new RegExp(safeLastChar);
     const valueAfterCursor = this._currentValueMasked.substring(this._currentCursorPosition - 1);
     const indexLastTypedChar = valueAfterCursor.search(regexLastTypedChar);
     const offset = shouldAddAdditionalCursorOffset ? 1 : 0;
@@ -568,14 +569,20 @@ class InputMaskChangeHandler {
 export const useInputMaskChangeHandler = (
   options: InputMaskChangeHandlerConstructorOptions,
 ): React.ChangeEventHandler => {
+  const { inputRef, inputMask, setValue, setTouched } = options;
   const inputMaskChangeHandler = useRef(null);
   const onChange = useRef(() => {});
   useEffect(() => {
-    inputMaskChangeHandler.current = new InputMaskChangeHandler(options);
+    inputMaskChangeHandler.current = new InputMaskChangeHandler({
+      inputRef,
+      inputMask,
+      setValue,
+      setTouched,
+    });
     onChange.current = inputMaskChangeHandler.current.onChange;
     return () => {
-      delete inputMaskChangeHandler.current;
+      onChange.current = () => {};
     };
-  }, []);
+  }, [inputRef, inputMask, setValue, setTouched]);
   return onChange.current || (() => {});
 };

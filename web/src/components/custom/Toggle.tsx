@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -7,19 +6,17 @@ import cx from '../../utils/css/composeClassNames';
 import './Toggle.scss';
 
 const NBSP = () => {
-  return (
-    <>&nbsp;&nbsp;</>
-  )
-}
+  return <>&nbsp;&nbsp;</>;
+};
 
 interface Props {
-  id?: string | number,
-  className?: string | object,
-  checked?: boolean,
-  onClick?: React.EventHandler<any>,
-  label?: string,
-  labelPosition?: 'before' | 'after',
-};
+  id?: string | number;
+  className?: string | object;
+  checked?: boolean;
+  onClick?: React.EventHandler<any>;
+  label?: string;
+  labelPosition?: 'before' | 'after';
+}
 const Toggle: React.FC<Props> = ({
   id,
   className,
@@ -33,7 +30,7 @@ const Toggle: React.FC<Props> = ({
 
   React.useEffect(() => {
     _setId((id || uuid()).toString());
-  }, []);
+  }, [id]);
 
   const handleClick = (ev: any) => {
     ev.persist();
@@ -45,16 +42,22 @@ const Toggle: React.FC<Props> = ({
   };
 
   return (
-    <span className={cx("switch-container d-inline-flex align-items-center", className)}>
+    <span className={cx('switch-container d-inline-flex align-items-center', className)}>
       {label && labelPosition === 'before' ? (
-        <label htmlFor={_id}>{label}<NBSP /></label>
+        <label htmlFor={_id}>
+          {label}
+          <NBSP />
+        </label>
       ) : null}
       <label className="switch" htmlFor={_id}>
         <input id={_id} type="checkbox" checked={_checked || checked} onClick={handleClick} />
         <span className="slider round"></span>
       </label>
       {label && labelPosition === 'after' ? (
-        <label htmlFor={_id}><NBSP />{label}</label>
+        <label htmlFor={_id}>
+          <NBSP />
+          {label}
+        </label>
       ) : null}
     </span>
   );

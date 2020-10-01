@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import cx from '../../utils/css/composeClassNames';
@@ -10,15 +9,15 @@ const ANIMATION_TIME_PRE_SHOW = 50;
 const ANIMATION_TIME_FADE = 150;
 
 interface Props {
-  id?: string,
-  title?: string,
-  overlayColor?: string,
-  isShowing?: boolean,
-  scrollable?: boolean,
-  centered?: boolean,
-  restrictBodyScroll?: boolean,
-  closeModal?: () => void,
-  onAfterShow?: () => void,
+  id?: string;
+  title?: string;
+  overlayColor?: string;
+  isShowing?: boolean;
+  scrollable?: boolean;
+  centered?: boolean;
+  restrictBodyScroll?: boolean;
+  closeModal?: () => void;
+  onAfterShow?: () => void;
 }
 
 /**
@@ -40,16 +39,13 @@ const Modal: React.FC<Props> = ({
   const [isRendering, setIsRendering] = React.useState<boolean>(false);
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
   const wasShowing = React.useRef<boolean>(false);
-  const t = React.useRef<(number)[]>([]);
+  const t = React.useRef<number[]>([]);
 
   const clearAllTimeouts = () => {
     t.current.forEach(timeout => clearTimeout(timeout));
   };
   const addTimeout = (fnc: TimerHandler, time?: number) => {
-    t.current.push(
-      setTimeout(fnc, time)
-    );
-    t.current[0] = setTimeout(fnc, time);
+    t.current.push(setTimeout(fnc, time));
   };
 
   React.useEffect(() => {
@@ -78,13 +74,14 @@ const Modal: React.FC<Props> = ({
 
     return () => {
       clearAllTimeouts();
-    }
-  }, [isShowing]);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShowing, restrictBodyScroll]);
 
   if (!isRendering) return null;
 
-  const idProp = id ? { id }: {};
-  const idPropLabel = id ? { id: `${id}-label` }: {};
+  const idProp = id ? { id } : {};
+  const idPropLabel = id ? { id: `${id}-label` } : {};
   const handleCloseModal = () => {
     closeModal && closeModal();
   };
@@ -117,7 +114,9 @@ const Modal: React.FC<Props> = ({
         <div className="modal-content">
           <div className="modal-header">
             {!!title && (
-              <h5 className="modal-title" {...idPropLabel}>{title}</h5>
+              <h5 className="modal-title" {...idPropLabel}>
+                {title}
+              </h5>
             )}
             <button
               type="button"
@@ -129,9 +128,7 @@ const Modal: React.FC<Props> = ({
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className="modal-body">
-            {children}
-          </div>
+          <div className="modal-body">{children}</div>
           <div className="modal-footer">
             <button
               type="button"

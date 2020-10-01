@@ -8,7 +8,7 @@
     },
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint/eslint-plugin", "jest"],
+  "plugins": ["@typescript-eslint/eslint-plugin", "react-hooks", "jest"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -28,7 +28,9 @@
     "@typescript-eslint/explicit-function-return-type": [0],
     "@typescript-eslint/no-use-before-define": ["error", { "classes": false, "functions": false }],
     "@typescript-eslint/no-empty-function": [0],
-    "@typescript-eslint/ban-ts-ignore": [0]
+    "@typescript-eslint/ban-ts-ignore": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": ["warn"]
   },
   "env": {
     "browser": true,
