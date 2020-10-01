@@ -15,6 +15,11 @@ VS Code user):
 "editor.formatOnSave": true
 ```
 
+## Create React App Configuration Overrides (CRACO)
+
+This CRA web app has modified so that additional babel configurations can be provided. For more
+information, see: [@craco/craco](https://www.npmjs.com/package/@craco/craco)
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
