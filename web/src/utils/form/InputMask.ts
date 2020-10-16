@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import setCursorPosition from '../../utils/dom/setCursorPosition';
 
@@ -47,24 +46,22 @@ const regexDateDelimiter = /[|()[\]/\\\-+_.\sa-zA-Z]/gi;
 const regexNumeric = /[0-9]/i;
 const regexAlpha = /[a-zA-Z]/i;
 
-const CHAR_DIGIT = "0";
-const CHAR_ALPHA = "a";
-const CHAR_ANY = "*";
-const CHAR_ESCAPE = "\\";
-const DEFAULT_MASK = "";
-const DEFAULT_MASK_DELIMITER = "-";
-const DEFAULT_MASK_VALUE = "";
-const DEFAULT_DECIMAL_CHAR = ".";
+const CHAR_DIGIT = '0';
+const CHAR_ALPHA = 'a';
+const CHAR_ANY = '*';
+const CHAR_ESCAPE = '\\';
+const DEFAULT_MASK = '';
+const DEFAULT_MASK_DELIMITER = '-';
+const DEFAULT_MASK_VALUE = '';
+const DEFAULT_DECIMAL_CHAR = '.';
 const DEFAULT_DECIMAL_PRECISION = Infinity;
-const DEFAULT_DATE_PATTERN = "YYYY-mm-dd";
-const DEFAULT_DATE_PATTERN_PARTS = ["yyyy", "mm", "dd"];
-const DEFAULT_PREFIX = "";
-const DEFAULT_PLACEHOLDER = "";
+const DEFAULT_DATE_PATTERN = 'YYYY-mm-dd';
+const DEFAULT_DATE_PATTERN_PARTS = ['yyyy', 'mm', 'dd'];
+const DEFAULT_PREFIX = '';
+const DEFAULT_PLACEHOLDER = '';
 
 const padWithZeros = (str: any, numFill = 0) => {
-  return (str || "")
-    .toString()
-    .padStart(numFill, "0");
+  return (str || '').toString().padStart(numFill, '0');
 };
 
 type Mask = any;
@@ -89,8 +86,8 @@ interface PatternPart {
 export default class InputMask {
   _mask: Mask = DEFAULT_MASK;
   _maskParts: any[] = [];
-  _maxLength: number = Infinity;
-  _guide: boolean = false;
+  _maxLength = Infinity;
+  _guide = false;
   _delimiter: string = DEFAULT_MASK_DELIMITER;
   _delimiterRegex: RegExp;
   _decimalChar: string = DEFAULT_DECIMAL_CHAR;
@@ -105,14 +102,14 @@ export default class InputMask {
   constructor(
     options: InputMaskConstructorOptions = {
       mask: DEFAULT_MASK_VALUE,
-    }
+    },
   ) {
     this._checkOptions(options);
     this._mask = options.mask || DEFAULT_MASK;
     this._maxLength = options.maxLength || Infinity;
     this._guide = options.guide || false;
     this._delimiter = options.delimiter || this._getDefaultDelimiter();
-    this._delimiterRegex = new RegExp(`\\${this._delimiter}`, "g");
+    this._delimiterRegex = new RegExp(`\\${this._delimiter}`, 'g');
     this._decimalChar = options.decimalChar || DEFAULT_DECIMAL_CHAR;
     this._decimalPrecision = options.decimalPrecision || DEFAULT_DECIMAL_PRECISION;
     this._datePattern = options.datePattern || DEFAULT_DATE_PATTERN;
@@ -125,18 +122,16 @@ export default class InputMask {
 
   _checkOptions(options: InputMaskConstructorOptions) {
     if (!options.mask) {
-      throw new Error(
-        "constructor `options.mask` param required and cannot be empty"
-      );
+      throw new Error('constructor `options.mask` param required and cannot be empty');
     }
   }
 
   static _preparePatternParts(mask: Mask): PatternPart[] {
     if (!mask) return [];
-    if (typeof mask !== "string" && typeof mask !== "number") return [];
-    const _mask = (mask || "").toString();
-    let parts: PatternPart[] = [];
-    let buffer = "";
+    if (typeof mask !== 'string' && typeof mask !== 'number') return [];
+    const _mask = (mask || '').toString();
+    const parts: PatternPart[] = [];
+    let buffer = '';
     let optionalFlag = false;
     let escapeNextChar = false;
     const addPart = (value: any, optional = false, escape = false) => {
@@ -157,14 +152,14 @@ export default class InputMask {
         escapeNextChar = true;
         continue;
       }
-      if (char === "[") {
+      if (char === '[') {
         optionalFlag = true;
         continue;
       }
-      if (char === "]") {
+      if (char === ']') {
         addPart(buffer, true, false);
         optionalFlag = false;
-        buffer = "";
+        buffer = '';
         continue;
       }
       if (optionalFlag) {
@@ -176,7 +171,7 @@ export default class InputMask {
     return parts;
   }
 
-  static _prepareDatePatternParts(datePattern: string = ""): string[] {
+  static _prepareDatePatternParts(datePattern = ''): string[] {
     return datePattern
       .split(regexNonAlphaNumeric)
       .filter(v => !!v)
@@ -184,34 +179,40 @@ export default class InputMask {
   }
 
   _getMaskPlaceholder() {
-    let dummyInput = "".padStart(this._mask.length, "9");
+    let dummyInput = ''.padStart(this._mask.length, '9');
     if (this._isTypeNumber()) {
-      dummyInput = "9999.99";
+      dummyInput = '9999.99';
     } else if (this._isTypeDate()) {
-      return this._datePatternParts.map(part => {
-        if (part.includes("y")) return "YYYY";
-        if (part.includes("m")) return "MM";
-        if (part.includes("d")) return "DD";
-        return "";
-      }).join(this._delimiter);
+      return this._datePatternParts
+        .map(part => {
+          if (part.includes('y')) return 'YYYY';
+          if (part.includes('m')) return 'MM';
+          if (part.includes('d')) return 'DD';
+          return '';
+        })
+        .join(this._delimiter);
     }
     return this.mask(dummyInput) || DEFAULT_PLACEHOLDER;
   }
 
   _isTypeNumber() {
-    return false ||
-      this._mask === "Number" ||
-      this._mask === "number" ||
+    return (
+      false ||
+      this._mask === 'Number' ||
+      this._mask === 'number' ||
       this._mask === Number ||
-      this._mask instanceof Number;
+      this._mask instanceof Number
+    );
   }
 
   _isTypeDate() {
-    return false ||
-      this._mask === "Date" ||
-      this._mask === "date" ||
+    return (
+      false ||
+      this._mask === 'Date' ||
+      this._mask === 'date' ||
       this._mask === Date ||
-      this._mask instanceof Date;
+      this._mask instanceof Date
+    );
   }
 
   _getDefaultDelimiter() {
@@ -226,10 +227,11 @@ export default class InputMask {
 
   _sanitizeInput(val: any): string {
     const formatVal = (regexCharsToStrip: RegExp) => {
-      const _val = (!val && val !== 0) ? "" : val;
-      return _val.toString()
-        .replace(regexCharsToStrip, "")
-        .replace(this._delimiterRegex, "");
+      const _val = !val && val !== 0 ? '' : val;
+      return _val
+        .toString()
+        .replace(regexCharsToStrip, '')
+        .replace(this._delimiterRegex, '');
     };
     if (this._isTypeNumber()) {
       return formatVal(regexNotNumeric);
@@ -237,34 +239,33 @@ export default class InputMask {
     if (this._isTypeDate()) {
       return formatVal(regexDateDelimiter);
     }
-    return (val || "").toString().replace(regexNonAlphaNumeric, "");
+    return (val || '').toString().replace(regexNonAlphaNumeric, '');
   }
 
-  _round(num: string = "") {
-    if (num.length <= this._decimalPrecision || !this._decimalPrecision){
+  _round(num = '') {
+    if (num.length <= this._decimalPrecision || !this._decimalPrecision) {
       return num;
     }
-    const rounded = ((parseInt(num, 10) || 0) / 10 ** num.length)
-      .toFixed(this._decimalPrecision);
-    if (rounded[0] === "1") return num.substring(0, this._decimalPrecision);
+    const rounded = ((parseInt(num, 10) || 0) / 10 ** num.length).toFixed(this._decimalPrecision);
+    if (rounded[0] === '1') return num.substring(0, this._decimalPrecision);
     return rounded.substring(2);
   }
 
   _maskNumber(val: any) {
     const _val: string = this._sanitizeInput(val);
-    if (!_val.length) return "";
+    if (!_val.length) return '';
 
     const isLastCharDecimal = _val[_val.length - 1] === this._decimalChar;
     const [numPartWhole, numPartDecimal] = _val.split(this._decimalChar).slice(0, 2);
 
     if (!numPartWhole) {
       if (isLastCharDecimal) {
-        return this._prefix + "0" + this._decimalChar;
+        return this._prefix + '0' + this._decimalChar;
       }
-      return "";
-    };
+      return '';
+    }
 
-    let composed = "";
+    let composed = '';
     let placeValue = 0;
     for (let i = numPartWhole.length - 1; i >= 0; i--) {
       if (placeValue && !(placeValue % 3)) {
@@ -275,8 +276,10 @@ export default class InputMask {
     }
     const suffix = numPartDecimal
       ? `${this._decimalChar}${this._round(numPartDecimal)}`
-      : (isLastCharDecimal ? this._decimalChar : "");
-    const prefix = composed ? this._prefix : "";
+      : isLastCharDecimal
+      ? this._decimalChar
+      : '';
+    const prefix = composed ? this._prefix : '';
     return prefix + composed + suffix;
   }
 
@@ -284,22 +287,22 @@ export default class InputMask {
     const _val: string = this._sanitizeInput(val);
     const datePatternParts = this._datePatternParts;
     const maxCursor = _val.length;
-    let composed = "";
+    let composed = '';
     let cursor = 0;
-    let currentDay: number = 0;
-    let currentMonth: number = 0;
-    let currentYear: number = 0;
+    let currentDay = 0;
+    let currentMonth = 0;
+    let currentYear = 0;
 
-    const setTimeFromInput = (currentTimeUnit: "d" | "m" | "y", partial: string) => {
+    const setTimeFromInput = (currentTimeUnit: 'd' | 'm' | 'y', partial: string) => {
       const intPartial = parseInt(partial, 10);
       switch (currentTimeUnit) {
-        case "d":
+        case 'd':
           currentDay = intPartial;
           break;
-        case "m":
+        case 'm':
           currentMonth = intPartial;
           break;
-        case "y":
+        case 'y':
           currentYear = intPartial;
           break;
         default:
@@ -307,7 +310,7 @@ export default class InputMask {
       }
     };
 
-    const captureChars = (currentTimeUnit: "d" | "m" | "y", numChars = 4, max = '9999') => {
+    const captureChars = (currentTimeUnit: 'd' | 'm' | 'y', numChars = 4, max = '9999') => {
       if (cursor !== 0) {
         composed += this._delimiter;
       }
@@ -316,15 +319,15 @@ export default class InputMask {
         const isUnderMin = parseInt(partial, 10) === 0;
         const isOverMax = parseInt(partial, 10) > parseInt(max, 10);
         if (isUnderMin) {
-          partial = "01".padStart(numChars, "0");
+          partial = '01'.padStart(numChars, '0');
         } else if (isOverMax) {
           partial = max;
         }
         setTimeFromInput(currentTimeUnit, partial);
       } else if (this._guide) {
-        partial = partial.padEnd(numChars, "_");
+        partial = partial.padEnd(numChars, '_');
       }
-      composed += partial
+      composed += partial;
       cursor += partial.length;
     };
 
@@ -336,10 +339,10 @@ export default class InputMask {
           composed += this._delimiter;
         }
         if (part.includes('y')) {
-          composed += "____";
+          composed += '____';
           cursor += 4;
         } else {
-          composed += "__";
+          composed += '__';
           cursor += 2;
         }
         continue;
@@ -389,10 +392,10 @@ export default class InputMask {
     if (this._isTypeDate()) return this._maskDate(val);
 
     const _val: string = this._sanitizeInput(val);
-    if (!_val) return "";
+    if (!_val) return '';
 
     const maxCursor = _val.length;
-    let composed = "";
+    let composed = '';
     let cursor = 0;
     const pushChar = (char: string) => {
       composed += char;
@@ -406,7 +409,7 @@ export default class InputMask {
       const compareVal = part.value
         .trim()
         .toLowerCase()
-        .replace(regexNonAlphaNumeric, "");
+        .replace(regexNonAlphaNumeric, '');
 
       if (part.escape) {
         composed += part.value;
@@ -415,12 +418,8 @@ export default class InputMask {
 
       if (cursor >= maxCursor) {
         if (!this._guide) break;
-        if (
-          compareVal === CHAR_DIGIT ||
-          compareVal === CHAR_ALPHA ||
-          compareVal === CHAR_ANY
-        ) {
-          pushChar("_");
+        if (compareVal === CHAR_DIGIT || compareVal === CHAR_ALPHA || compareVal === CHAR_ANY) {
+          pushChar('_');
           continue;
         }
       }
@@ -443,7 +442,7 @@ export default class InputMask {
 
       composed += part.value;
     }
-    const prefix = composed ? this._prefix : "";
+    const prefix = composed ? this._prefix : '';
     return prefix + composed;
   }
 
@@ -459,26 +458,26 @@ export default class InputMask {
 }
 
 interface InputMaskChangeHandlerConstructorOptions {
-  inputRef: React.Ref<any>,
-  inputMask: InputMask,
-  setValue: (value: any) => void,
-  setTouched?: (isTouched: boolean) => void,
+  inputRef: React.Ref<any>;
+  inputMask: InputMask;
+  setValue: (value: any) => void;
+  setTouched?: (isTouched: boolean) => void;
 }
 class InputMaskChangeHandler {
   _inputRef: any = null;
   _inputMask: InputMask = null;
   _setValue: (value: any) => void = () => {};
   _setTouched: (isTouched: boolean) => void = () => {};
-  _currentValue: string = '';
-  _currentValueRaw: string = '';
-  _currentValueMasked: string = '';
-  _currentValueUnmasked: string = '';
-  _currentCursorPosition: number = 0;
-  _lastValueRaw: string = '';
-  _lastValueMasked: string = '';
-  _lastValueUnmasked: string = '';
-  _lastCursorPosition: number = 0;
-  _lastTypedChar: string = '';
+  _currentValue = '';
+  _currentValueRaw = '';
+  _currentValueMasked = '';
+  _currentValueUnmasked = '';
+  _currentCursorPosition = 0;
+  _lastValueRaw = '';
+  _lastValueMasked = '';
+  _lastValueUnmasked = '';
+  _lastCursorPosition = 0;
+  _lastTypedChar = '';
 
   constructor(options: InputMaskChangeHandlerConstructorOptions) {
     this._inputRef = options.inputRef;
@@ -490,10 +489,7 @@ class InputMaskChangeHandler {
   onChange = (ev: any) => {
     if (!this._inputMask) return;
     if (!this._inputRef || !this._inputRef.current) return;
-    const {
-      selectionStart: currentCursorPosition = 0,
-      value: currentEventValue = '',
-    } = ev.target;
+    const { selectionStart: currentCursorPosition = 0, value: currentEventValue = '' } = ev.target;
     let isDeleting = false;
     this._currentValue = currentEventValue;
     this._currentValueRaw = currentEventValue;
@@ -506,7 +502,10 @@ class InputMaskChangeHandler {
     if (this._checkIsDeleting()) {
       isDeleting = true;
       const pre = this._lastValueMasked.substring(0, currentCursorPosition);
-      const post = this._lastValueMasked.substring(currentCursorPosition + 1, this._lastValueMasked.length);
+      const post = this._lastValueMasked.substring(
+        currentCursorPosition + 1,
+        this._lastValueMasked.length,
+      );
       this._currentValue = pre + post;
     }
     this._setTouched(true);
@@ -522,63 +521,68 @@ class InputMaskChangeHandler {
     this._lastValueUnmasked = this._currentValueUnmasked;
     this._lastValueRaw = this._currentValueRaw;
     this._lastCursorPosition = this._currentCursorPosition;
-  }
+  };
 
   _checkIsDeleting = (): boolean => {
     return this._lastValueMasked.length - this._currentValueRaw.length === 1;
-  }
+  };
 
   _setCursorForward = (): void => {
     const cursorPosition = this._getCursorForwardPosition();
     setTimeout(() => {
-      setCursorPosition(
-        this._inputRef.current,
-        cursorPosition,
-      );
+      setCursorPosition(this._inputRef.current, cursorPosition);
     }, 0);
-  }
+  };
 
   _setCursorBackward = (): void => {
     const cursorPosition = this._getCursorBackwardPosition();
     setTimeout(() => {
-      setCursorPosition(
-        this._inputRef.current,
-        cursorPosition,
-      );
+      setCursorPosition(this._inputRef.current, cursorPosition);
     }, 0);
-  }
+  };
 
   _getCursorForwardPosition = (): number => {
     const didAddMaskChars = this._currentValueMasked.length > this._lastValueMasked.length + 1;
-    const nextCursorMatchesLastTyped = this._lastTypedChar === this._currentValueMasked[this._currentCursorPosition];
+    const nextCursorMatchesLastTyped =
+      this._lastTypedChar === this._currentValueMasked[this._currentCursorPosition];
     const shouldAddAdditionalCursorOffset = didAddMaskChars && nextCursorMatchesLastTyped;
-    const regexLastTypedChar = new RegExp(this._lastTypedChar);
+    const safeLastChar = (this._lastTypedChar || '').toString().replace(/[()[\]]/, '');
+    const regexLastTypedChar = new RegExp(safeLastChar);
     const valueAfterCursor = this._currentValueMasked.substring(this._currentCursorPosition - 1);
     const indexLastTypedChar = valueAfterCursor.search(regexLastTypedChar);
     const offset = shouldAddAdditionalCursorOffset ? 1 : 0;
-    const newPos = this._currentCursorPosition +
+    const newPos =
+      this._currentCursorPosition +
       (indexLastTypedChar > -1 ? indexLastTypedChar : this._currentValueMasked.length) +
       offset;
     return newPos;
-  }
+  };
 
   _getCursorBackwardPosition = (): number => {
     const valueBeforeCursor = this._currentValueMasked.substring(0, this._currentCursorPosition);
     const indexLastNumber = valueBeforeCursor.search(regexLastAlphaNumeric);
     const newPos = (indexLastNumber > -1 ? indexLastNumber : this._currentValueMasked.length) + 1;
     return newPos;
-  }
+  };
 }
 
-export const useInputMaskChangeHandler = (options: InputMaskChangeHandlerConstructorOptions): React.ChangeEventHandler => {
+export const useInputMaskChangeHandler = (
+  options: InputMaskChangeHandlerConstructorOptions,
+): React.ChangeEventHandler => {
+  const { inputRef, inputMask, setValue, setTouched } = options;
   const inputMaskChangeHandler = useRef(null);
   const onChange = useRef(() => {});
   useEffect(() => {
-    inputMaskChangeHandler.current = new InputMaskChangeHandler(options);
+    inputMaskChangeHandler.current = new InputMaskChangeHandler({
+      inputRef,
+      inputMask,
+      setValue,
+      setTouched,
+    });
     onChange.current = inputMaskChangeHandler.current.onChange;
     return () => {
-      delete inputMaskChangeHandler.current;
+      onChange.current = () => {};
     };
-  }, []);
+  }, [inputRef, inputMask, setValue, setTouched]);
   return onChange.current || (() => {});
 };

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import cx from '../../utils/css/composeClassNames';
@@ -16,28 +15,21 @@ const ANIMATION_TIME_FADE = 250;
 export type DrawerAnimationType = 'slide' | 'slideOver' | 'none';
 
 interface Props {
-  isShowing?: boolean,
-  hideNav?: () => void,
-  animationType?: DrawerAnimationType,
+  isShowing?: boolean;
+  hideNav?: () => void;
+  animationType?: DrawerAnimationType;
 }
-const NavDrawer: React.FC<Props> = ({
-  isShowing,
-  hideNav,
-  children,
-  animationType = 'slide',
-}) => {
+const NavDrawer: React.FC<Props> = ({ isShowing, hideNav, children, animationType = 'slide' }) => {
   const [isRendering, setIsRendering] = React.useState<boolean>(false);
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
   const wasShowing = React.useRef<boolean>(false);
-  const t = React.useRef<(number)[]>([]);
+  const t = React.useRef<number[]>([]);
 
   const clearAllTimeouts = () => {
     t.current.forEach(timeout => clearTimeout(timeout));
   };
   const addTimeout = (fnc: TimerHandler, time?: number) => {
-    t.current.push(
-      setTimeout(fnc, time)
-    );
+    t.current.push(setTimeout(fnc, time));
     t.current[0] = setTimeout(fnc, time);
   };
 
@@ -78,8 +70,8 @@ const NavDrawer: React.FC<Props> = ({
 
     return () => {
       clearAllTimeouts();
-    }
-  }, [isShowing]);
+    };
+  }, [isShowing, animationType]);
 
   if (!isRendering) return null;
 
@@ -101,13 +93,9 @@ const NavDrawer: React.FC<Props> = ({
         >
           <span aria-hidden="true">&times;</span>
         </button>
-        <h2 className="nav-drawer-title">
-          NAV
-        </h2>
+        <h2 className="nav-drawer-title">NAV</h2>
         <hr className="nav-drawer-divider" />
-        <div className="nav-drawer-content">
-          {children}
-        </div>
+        <div className="nav-drawer-content">{children}</div>
       </div>
     </div>
   );

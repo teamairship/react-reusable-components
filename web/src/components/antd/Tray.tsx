@@ -3,9 +3,9 @@ import { Drawer, Button } from 'antd';
 
 import './Tray.scss';
 
-type TrayState =  [boolean, () => void, () => void]
+type TrayState = [boolean, () => void, () => void];
 
-export const useTrayState = (initialVal: boolean = false): TrayState => {
+export const useTrayState = (initialVal = false): TrayState => {
   const [visible, setVisible] = useState(initialVal);
   const open = () => {
     setVisible(true);
@@ -26,7 +26,12 @@ interface TrayProps {
   visible?: boolean;
   onClose?: () => void;
 }
-const Tray: React.FC<TrayProps> = ({ title = '', visible = false, onClose = () => {}, children = null }) => {
+const Tray: React.FC<TrayProps> = ({
+  title = '',
+  visible = false,
+  onClose = () => {},
+  children = null,
+}) => {
   const handleClose = () => {
     if (typeof onClose !== 'function') return;
     onClose();

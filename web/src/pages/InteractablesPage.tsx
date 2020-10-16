@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ExampleSection from '../_AppInternal/_components/ExampleSection';
 import ExampleCode from '../_AppInternal/_components/ExampleCode';
@@ -9,8 +8,6 @@ import Toggle from '../components/custom/Toggle';
 import { TrayExample } from '../components/antd/Tray';
 
 const InteractablesPage = () => {
-  const [isBootstrapModalShowing, setIsBootstrapModalShowing] = React.useState(false);
-  const refBootstrapModalInput = React.useRef(null);
   return (
     <>
       <h1 className="mb-4">Interactable Components</h1>
@@ -21,25 +18,13 @@ const InteractablesPage = () => {
 
       <ExampleSection title="Bootstrap Button">
         <ExampleCode>
-          <Button
-            type="dark"
-          >
-            Bootstrap Button
-          </Button>
+          <Button type="dark">Bootstrap Button</Button>
         </ExampleCode>
         <ExampleCode>
-          <Button
-            type="primary"
-          >
-            Click me!
-          </Button>
+          <Button type="primary">Click me!</Button>
         </ExampleCode>
         <ExampleCode>
-          <Button
-            type="warning"
-          >
-            Something important
-          </Button>
+          <Button type="warning">Something important</Button>
         </ExampleCode>
       </ExampleSection>
 

@@ -1,0 +1,40 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint/eslint-plugin", "react-hooks", "jest"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier",
+    "eslint-config-prettier/@typescript-eslint",
+    "plugin:react/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
+  "ignorePatterns": ["craco.config.js"],
+  "rules": {
+    "strict": ["error", "never"],
+    "react/prop-types": [0],
+    "@typescript-eslint/no-empty-interface": [0],
+    "@typescript-eslint/no-explicit-any": [0],
+    "@typescript-eslint/explicit-function-return-type": [0],
+    "@typescript-eslint/no-use-before-define": ["error", { "classes": false, "functions": false }],
+    "@typescript-eslint/no-empty-function": [0],
+    "@typescript-eslint/ban-ts-ignore": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": ["warn"],
+    "array-callback-return": ["error"]
+  },
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  }
+}
