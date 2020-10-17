@@ -1,4 +1,3 @@
-
 import React from 'react';
 import InputMask from '../../../utils/form/InputMask';
 import { FormikInputBase, FormikInputBaseProps } from './_FormikInputBase';
@@ -10,7 +9,7 @@ const InputDate: React.FC<FormikInputBaseProps> = ({ placeholder, ...props }) =>
     <FormikInputBase
       {...props}
       inputMask={inputMaskDate}
-      placeholder={placeholder || (inputMaskDate.placeholder)}
+      placeholder={placeholder || inputMaskDate.placeholder}
     />
   );
 };

@@ -1,52 +1,66 @@
-
-import React from 'react'
+import React from 'react';
 import useUuid from '../../../hooks/useUuid';
 import cx, { ClassName } from '../../../utils/css/composeClassNames';
 
 interface InputBaseProps {
-  id?: string,
-  label?: string,
-  name: string,
-  placeholder?: string,
-  value: number | string | undefined,
-  onChange?: React.ChangeEventHandler,
-  onFocus?: React.FocusEventHandler,
-  onKeyUp?: React.KeyboardEventHandler,
-  errorComponent?: React.ReactChild,
-  inline?: boolean,
-  classNameInput?: ClassName,
-  classNameInputContainer?: ClassName,
-  classNameLabel?: ClassName,
-  classNameLabelContainer?: ClassName,
-  classNameContainer?: ClassName,
-  styleInput?: React.StyleHTMLAttributes<any>,
-  styleInputContainer?: React.StyleHTMLAttributes<any>,
-  styleLabel?: React.StyleHTMLAttributes<any>,
-  styleLabelContainer?: React.StyleHTMLAttributes<any>,
-  styleContainer?: React.StyleHTMLAttributes<any>,
+  id?: string;
+  label?: string;
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  value: number | string | undefined;
+  onChange?: React.ChangeEventHandler;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
+  onKeyUp?: React.KeyboardEventHandler;
+  errorComponent?: React.ReactChild;
+  inline?: boolean;
+  classNameInput?: ClassName;
+  classNameInputError?: ClassName;
+  classNameInputContainer?: ClassName;
+  classNameLabel?: ClassName;
+  classNameLabelContainer?: ClassName;
+  classNameContainer?: ClassName;
+  styleInput?: React.CSSProperties;
+  styleInputError?: React.CSSProperties;
+  styleInputContainer?: React.CSSProperties;
+  styleLabel?: React.CSSProperties;
+  styleLabelContainer?: React.CSSProperties;
+  styleContainer?: React.CSSProperties;
+  hasError?: boolean;
+  inputRef?: React.RefObject<any>;
 }
-export const InputBase = React.forwardRef(({
+
+export const InputBase: React.FC<InputBaseProps> = ({
   id,
+  name,
   label,
   placeholder,
+  required,
   value,
   onChange,
   onFocus,
+  onBlur,
   onKeyUp,
   errorComponent,
   inline,
   classNameInput,
+  classNameInputError,
   classNameInputContainer,
   classNameLabel,
   classNameLabelContainer,
   classNameContainer,
-  styleInput = {},
+  styleInput = { border: '1px solid lightgray' },
+  styleInputError = { borderColor: 'red', color: 'red' },
   styleInputContainer = {},
   styleLabel = {},
   styleLabelContainer = {},
   styleContainer = {},
-}: InputBaseProps, ref?: React.Ref<any>) => {
+  hasError,
+  inputRef,
+}) => {
   const uuid = useUuid(id);
+  const idProp = uuid ? { id: uuid } : {};
   const valueProp = onChange ? { value: value || '' } : { defaultValue: value };
   const inlineStyle = inline ? { display: 'inline-block' } : { display: 'block' };
 
@@ -64,28 +78,34 @@ export const InputBase = React.forwardRef(({
       style: { ...inlineStyle, ...styleLabelContainer },
     },
     input: {
-      className: cx(classNameInput),
-      style: styleInput,
+      className: cx(classNameInput, hasError ? classNameInputError : null),
+      style: { ...styleInput, ...(hasError ? styleInputError : {}) },
     },
     inputContainer: {
       className: cx(classNameInputContainer),
-      style: { ...inlineStyle, ...styleInputContainer }
+      style: { ...inlineStyle, ...styleInputContainer },
     },
-  }
+  };
 
   const inner = (
     <>
-      <span {...styling.labelContainer}>
-        <strong {...styling.label}>
-          {label}
-        </strong>
-      </span>
+      {label ? (
+        <span {...styling.labelContainer}>
+          <strong {...styling.label}>
+            {label}
+            {required ? <span>*</span> : null}
+          </strong>
+        </span>
+      ) : null}
       <span {...styling.inputContainer}>
         <input
-          id={uuid}
-          ref={ref}
+          {...idProp}
+          required={required}
+          name={name}
+          ref={inputRef}
           onChange={onChange}
           onFocus={onFocus}
+          onBlur={onBlur}
           onKeyUp={onKeyUp}
           placeholder={placeholder}
           {...styling.input}
@@ -97,16 +117,14 @@ export const InputBase = React.forwardRef(({
 
   return (
     <p {...styling.container}>
-      {
-        label ? (
-          <label htmlFor={uuid} style={{ display: 'block', marginBottom: 10 }}>
-            {inner}
-          </label>
-        ) : (
-          inner
-        )
-      }
+      {label ? (
+        <label htmlFor={uuid} style={{ display: 'block', marginBottom: 10 }}>
+          {inner}
+        </label>
+      ) : (
+        inner
+      )}
       {errorComponent}
     </p>
   );
-});
+};

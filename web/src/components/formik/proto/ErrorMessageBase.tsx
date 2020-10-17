@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { FieldMetaProps } from 'formik';
 
@@ -13,13 +12,12 @@ const defaultMeta: FieldMetaProps<any> = {
   error: null,
 };
 
-export const ErrorMessageBase = ({
-  meta = defaultMeta,
-  customMsg = '',
-}) => {
+export const ErrorMessageBase = ({ meta = defaultMeta, customMsg = '' }) => {
   const derivedErrMsg = typeof meta.error === 'string' ? meta.error : '';
   const msg = customMsg || derivedErrMsg;
   return meta.touched && meta.error ? (
-    <div className='error'>{msg}</div>
-  ) : null
+    <span className="error" style={{ color: 'red' }}>
+      {msg}
+    </span>
+  ) : null;
 };

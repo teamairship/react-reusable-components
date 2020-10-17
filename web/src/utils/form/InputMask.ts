@@ -55,7 +55,7 @@ const DEFAULT_MASK_DELIMITER = '-';
 const DEFAULT_MASK_VALUE = '';
 const DEFAULT_DECIMAL_CHAR = '.';
 const DEFAULT_DECIMAL_PRECISION = Infinity;
-const DEFAULT_DATE_PATTERN = 'YYYY-mm-dd';
+export const DEFAULT_DATE_PATTERN = 'YYYY-mm-dd';
 const DEFAULT_DATE_PATTERN_PARTS = ['yyyy', 'mm', 'dd'];
 const DEFAULT_PREFIX = '';
 const DEFAULT_PLACEHOLDER = '';
@@ -458,7 +458,7 @@ export default class InputMask {
 }
 
 interface InputMaskChangeHandlerConstructorOptions {
-  inputRef: React.Ref<any>;
+  inputRef: React.RefObject<any>;
   inputMask: InputMask;
   setValue: (value: any) => void;
   setTouched?: (isTouched: boolean) => void;
@@ -485,6 +485,7 @@ class InputMaskChangeHandler {
     this._inputMask = options.inputMask;
     this._setValue = options.setValue;
     this._setTouched = options.setTouched;
+    return this;
   }
 
   onChange = (ev: any) => {
@@ -571,10 +572,12 @@ export const useInputMaskChangeHandler = (
   options: InputMaskChangeHandlerConstructorOptions,
 ): React.ChangeEventHandler => {
   const { inputRef, inputMask, setValue, setTouched } = options;
-  const onChangeFallback = options?.onChangeFallback || (() => {});
+  const onChangeFallback = options.onChangeFallback || (() => {});
   const inputMaskChangeHandler = useRef(null);
   const onChange = useRef(onChangeFallback);
   useEffect(() => {
+    if (!inputMask) return;
+    if (!inputRef || !inputRef.current) return;
     inputMaskChangeHandler.current = new InputMaskChangeHandler({
       inputRef,
       inputMask,

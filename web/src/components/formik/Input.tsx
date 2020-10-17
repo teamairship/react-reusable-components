@@ -1,11 +1,11 @@
 import React from 'react';
-import InputText from "./proto/InputText";
+import InputText from './proto/InputText';
 import InputDate from './proto/InputDate';
-import InputNumber from "./proto/InputNumber";
-import InputCreditCard from "./proto/InputCreditCard";
-import InputPhone from "./proto/InputPhone";
-import InputPrice from "./proto/InputPrice";
-import { FormikInputBaseProps } from "./proto/_FormikInputBase";
+import InputNumber from './proto/InputNumber';
+import InputCreditCard from './proto/InputCreditCard';
+import InputPhone from './proto/InputPhone';
+import InputPrice from './proto/InputPrice';
+import { FormikInputBaseProps } from './proto/_FormikInputBase';
 
 enum InputTypeEnum {
   text,
@@ -16,7 +16,7 @@ enum InputTypeEnum {
   price,
   __fallback__,
 }
-type InputType = keyof typeof InputTypeEnum;
+export type InputType = keyof typeof InputTypeEnum;
 type ValidInputComponent = React.FC<any>;
 
 const inputComponentMap: {
@@ -30,8 +30,8 @@ const inputComponentMap: {
   price: InputPrice,
   __fallback__: InputText,
 };
-type InputProps = Omit<FormikInputBaseProps, 'inputMask'> & {
-  type: InputType,
+export type InputProps = Omit<FormikInputBaseProps, 'inputMask'> & {
+  type: InputType;
 };
 
 /**
@@ -49,7 +49,7 @@ type InputProps = Omit<FormikInputBaseProps, 'inputMask'> & {
 
 const Input: React.FC<InputProps> = ({ type, ...props }) => {
   const InputComponent = inputComponentMap[type] || inputComponentMap.__fallback__;
-  return <InputComponent {...props} />
+  return <InputComponent {...props} />;
 };
 
 export default Input;
