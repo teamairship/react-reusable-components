@@ -25,19 +25,24 @@ export const FormikInputBase: React.FC<FormikInputBaseProps> = ({
   inputMask,
   inputRef,
   afterChange,
-  ...props
 }) => {
   const [field, meta, helpers] = useField(name);
   const internalInputRef = useRef(null);
   const isInitialized = useRef(false);
 
+  const afterChangeRef = useRef(null);
+  afterChangeRef.current = afterChange;
+
   const form = useFormikContext(); // values, submitForm, etc.
+  const formRef = useRef(null);
+  formRef.current = form;
+
   useEffect(() => {
-    if (afterChange && isInitialized.current) {
-      afterChange(field.value, form);
+    if (afterChangeRef.current && isInitialized.current) {
+      afterChangeRef.current(field.value, formRef.current);
     }
     isInitialized.current = true;
-  }, [field.value]);
+  }, [field.value, afterChangeRef, formRef]);
 
   const onChange = useInputMaskChangeHandler({
     inputRef: inputRef || internalInputRef,
