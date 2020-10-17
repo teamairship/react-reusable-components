@@ -21,13 +21,16 @@ const SCHEMA_FIELD_PROPS = [
 ];
 
 export class FormikSchema {
+  _inspect: any = {};
   _schema: FormikSchemaObject = {};
-  _initialValues: { [key: string]: any } = {};
   _validate = () => ({});
   _fieldValidations: FieldValidator[] = [];
   _requiredFields: string[] = [];
 
+  public initialValues: { [key: string]: any } = {};
+
   constructor(schema: FormikSchemaConstructorOptions = {}) {
+    this._inspect = schema;
     this._normalizeSchema(schema);
     this._populateInitialValues();
     return this;
@@ -36,10 +39,6 @@ export class FormikSchema {
   public getFieldProps = (fieldName: string): InputProps => {
     // @ts-ignore
     return pick(this._schema[fieldName], SCHEMA_FIELD_PROPS);
-  };
-
-  public getInitialValues = () => {
-    return this._initialValues;
   };
 
   public validate = (values: FormikValues = {}): FormikErrors<any> => {
@@ -102,11 +101,11 @@ export class FormikSchema {
 
   private _populateInitialValues = () => {
     const keys: string[] = Object.keys(this._schema);
-    this._initialValues = {};
+    this.initialValues = {};
     for (let i = 0; i < keys.length; i++) {
       const field = this._schema[keys[i]];
       this._checkFieldInitialValue(keys[i], field);
-      this._initialValues[keys[i]] = this._schema[keys[i]].initialValue || '';
+      this.initialValues[keys[i]] = this._schema[keys[i]].initialValue || '';
     }
   };
 }

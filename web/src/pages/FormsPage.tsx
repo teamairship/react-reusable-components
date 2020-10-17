@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ExampleSection from '../_AppInternal/_components/ExampleSection';
 import ExampleCode from '../_AppInternal/_components/ExampleCode';
 
@@ -12,7 +13,6 @@ import InputPrice from '../components/formik/proto/InputPrice';
 import Input from '../components/formik/Input';
 import { FormikSchema } from 'utils/form/FormikSchema/FormikSchema';
 import InputText from 'components/formik/proto/InputText';
-import { FormikErrors } from 'formik';
 
 const FormsPage = () => {
   const onSubmit = (values: any) => {
@@ -32,10 +32,6 @@ const FormsPage = () => {
     numCoconuts: '',
     price: '',
   };
-  // goal: auto validation based on input type
-  // type: number - validate that it is a proper number
-  // type: credit card - validate that it has 16 digits and is only numbers
-  // type: date - validate that it matches date pattern
 
   const schema = new FormikSchema({
     firstName: {
@@ -98,8 +94,6 @@ const FormsPage = () => {
     // },
   });
 
-  console.log({ initialValues: schema.getInitialValues() });
-
   return (
     <>
       <h2 className="mb-4">Forms &amp; Inputs</h2>
@@ -135,10 +129,49 @@ const FormsPage = () => {
       </ExampleSection>
 
       <ExampleSection title="Formik form with pre-defined schema">
-        <ExampleCode>
+        <p>
+          With a simple API, it is possible to get initialValues, default validation, and other
+          goodies out of the box.
+        </p>
+        <ExampleCode
+          code={JSON.stringify(
+            schema._inspect,
+            (key, val) => {
+              if (typeof val === 'function') {
+                return 'fn()';
+              } else {
+                return val;
+              }
+            },
+            2,
+          )}
+        />
+        <br />
+        <p>Auto-generated initial values:</p>
+        <ExampleCode code={JSON.stringify(schema.initialValues, null, 2)} />
+        <br />
+        <ExampleCode
+          code={`
+<Form
+  onSubmit={onSubmit}
+  initialValues={schema.initialValues}
+  validate={schema.validate}
+  validateOnBlur
+>
+  <Input {...schema.getFieldProps('firstName')} />
+  <Input {...schema.getFieldProps('lastName')} />
+  <Input {...schema.getFieldProps('dateOfBirth')} />
+  <Input {...schema.getFieldProps('is21OrOlder')} />
+  <Input {...schema.getFieldProps('numYearsEducation')} />
+  <Button type="dark" submit>
+    Submit
+  </Button>
+</Form>
+        `}
+        >
           <Form
             onSubmit={onSubmit}
-            initialValues={schema.getInitialValues()}
+            initialValues={schema.initialValues}
             validate={schema.validate}
             validateOnBlur
           >
