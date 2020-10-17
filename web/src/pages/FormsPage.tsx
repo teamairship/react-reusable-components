@@ -52,7 +52,7 @@ const FormsPage = () => {
       type: 'text',
       initialValue: 'Townsend',
       msgOnFail: 'Name cannot be "Jones"',
-      validate: value => value !== 'Jones',
+      validate: value => !/^jones$/i.test(value),
       required: true,
     },
     dateOfBirth: {

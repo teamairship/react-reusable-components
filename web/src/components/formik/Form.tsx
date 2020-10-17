@@ -6,16 +6,7 @@ export type FormProps = FormikConfig<FormikValues>;
 const Form: React.FC<FormProps> = ({ children, initialValues, onSubmit, ...props }) => {
   return (
     <Formik onSubmit={onSubmit} initialValues={initialValues} {...props}>
-      {formikProps => (
-        <form
-          // @ts-ignore - TS complains because onReset is defined in FormProps
-          onReset={formikProps.handleReset}
-          onSubmit={formikProps.handleSubmit}
-          {...props}
-        >
-          {children}
-        </form>
-      )}
+      <FormikForm>{children}</FormikForm>
     </Formik>
   );
 };
